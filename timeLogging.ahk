@@ -190,7 +190,10 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 		; Time Log Toggle Variabl 'fixed'
 		tlfx:
 			::tlfx::
-				GoSub fix
+				if fixed
+				{
+					gosub fix
+				}
 				fixed := !fixed
 				return
 
