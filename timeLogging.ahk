@@ -7,225 +7,190 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ;Time logging
 ;-------------------------------------------------------
 
-	;Time Log File Save // sometimes it doesn't type the C in the beginning of the path
-	tlsf:
-		::tlsf::
-			gosub fix
-			FormatTime, CurrentDateTime,, yy.MM.dd.HH.mm.ss.
-			FormatTime, CurrentDateTimeDay,, ddd
-			Sendinput ^s C:\Users\e_yacoub\Documents\logs\%CurrentDateTime%%CurrentDateTimeDay%.txt
-			return
+needsFix                := true
+logspath                := "C:\Users\e_yacoub\Documents\logs\"
 
+TicketOfTheDay          := "TE-13894 | Deployment PhatHO***** |"
+DeploymentTicket        := "TE-13894 | Deployment PhatHO***** |"
+PullRequestTicket       := "TE-13897 | PR PHatHo************* |"
+SprintPlanningTicket    := "TE-13631 | Sprint Planning******* |"
+SprintRefiningTicket    := "TE-13682 | Sprint Refining******* |"
+BranchManagementTicket  := "TE-13736 | Branch MGT RoySalam*** |"
+InternalSupportTicket   := "TE-13382 | Internal support****** |"
 
-	; Time Log New Line
-		tlnl:
-			::tlnl::
-			gosub timelog
-			gosub timelogtemplate
-			return
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;; update regularly ;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-	; Today's date in Jira's format, shift starts at 10:30
-	jiratoday:
-		::jiratoday::
-			FormatTime, CurrentDateTime,, d/MMM/yy
-			SendInput %CurrentDateTime% 10:30 AM
-			return
+tltd: 	        ; Time Log Ticket of the day
+    ::tltd::
+        insertTicketAndShortDescription(TicketOfTheDay)
+        return
 
-	;Time Log Position 1 : Ticket number
-	tlp1:
-		::tlp1::
-		gosub fixwithflag
-		sendinput {home}
-		loop 24
-		{
-			sendinput {right}	
-		}
-		return
+tldt:           ; Time Log Deployment Ticket
+    ::tldt::
+        insertTicketAndShortDescription(DeploymentTicket)
+        return
 
-	;Time Log Position 2 : Ticket Short Description
-	tlp2:
-		::tlp2::
-		gosub fixwithflag
-		sendinput {home}
-		loop 35
-		{
-			sendinput {right}	
-		}
-		return
+tlpr:	        ; Time Log Pull Request
+    ::tlpr::
+    insertTicketAndShortDescription(PullRequestTicket)
+    return
 
+tlbm:	        ; Time Log Branch Management
+    ::tlbm::
+        insertTicketAndShortDescription(BranchManagementTicket)
+        return
 
-	;Time Log Position 3 : Ticket Long Description
-	tlp3:
-		::tlp3::
-		gosub fixwithflag
-		sendinput {home}
-		loop 60
-		{
-			sendinput {right}	
-		}
-		return
+tlsp:	        ; Time Log Sprint Planning
+    ::tlsp::
+        insertTicketAndShortDescription(SprintPlanningTicket)
+        return
 
-	;Time Log Position 4 : Status of the time log
-	tlp4:
-		::tlp4::
-		gosub fixwithflag
-		sendinput {home}
-		loop 130
-		{
-			sendinput {right}	
-		}
-		return
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;Permanent
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-	; Time Log Internal Support	
-	tlis:
-		::tlis::
-			gosub fixwithflag
-			fixed := false
-			gosub tlp1
-			SendInput TE-13382 | Internal support
-			loop 6
-			{
-			sendinput *
-			}
-			gosub tlp4
-			SendInput Loggable
-			gosub tlp3
-			fixed := true
-			return
+::tlsf::            ;Time Log File Save
+    FormatTime, CurrentDateTime,, yy.MM.dd.HH.mm.ss.
+    FormatTime, CurrentDateTimeDay,, ddd
+    Sendinput ^s %logspath%%CurrentDateTime%%CurrentDateTimeDay%.txt
+    return
 
-	; Time Log Ticket of the day
-	tltd:
-		::tltd::
-			gosub fixwithflag
-			fixed := false
-			gosub tlp1
-			SendInput TE-13876 | BE MM Pornstars
-			loop 7
-			{
-				SendInput *
-			}
-			GoSub tlp4
-			SendInput Loggable
-			Loop 4
-			{
-				SendInput *
-			}
-			GoSub tlp3
-			GoSub tlfx
-			return
+::tlnl::            ; Time Log New Line
+    timelogstamp()
+    timelogcontent()
+    return
 
-	; Time Log Pull Request
-	tlpr:
-		::tlpr::
-			gosub fixwithflag
-			fixed := false
-			gosub tlp1
-			SendInput TE-13739 | PR RoySalam*********** |
-			GoSub tlp4
-			GoSub tlsl
-			GoSub tlp3
-			GoSub tlfx
-			return
+::jiradate00::      ; Today's date in Jira's format, shift starts at 10:30
+    outputJiraDate(0)
+    return
 
-	; Time Log Branch Management
-	tlbm:
-		::tlbm::
-			gosub fixwithflag
-			fixed := false
-			gosub tlp1
-			SendInput TE-13736 | Branch MGT RoySalam*** |
-			GoSub tlp4
-			GoSub tlsl
-			GoSub tlp3
-			GoSub tlfx
-			return
+::jiradate-1::      ; Today's date in Jira's format, shift starts at 10:30
+    outputJiraDate(-1)
+    return
 
-	; Time Log Sprint Planning		
-	tlsp:
-		::tlsp::
-			gosub fixwithflag
-			fixed := false
-			gosub tlp1
-			SendInput TE-13631 | Sprint Planning******* |
-			GoSub tlp4
-			GoSub tlsl
-			GoSub tlp3
-			GoSub tlfx
-			return
-		
-	; Time Log Sprint Refining
-	tlsr:
-		::tlsr::
-			gosub fixwithflag
-			fixed := false
-			gosub tlp1
-			SendInput TE-13682 | Sprint Refining******* |
-			GoSub tlp4
-			GoSub tlsl
-			GoSub tlp3
-			GoSub tlfx
-			return
-			
+::jiradate-2::      ; Today's date in Jira's format, shift starts at 10:30
+    outputJiraDate(-2)
+    return
+        
+;;;;;;;;;;;
+;POSITIONS
+;;;;;;;;;;;
 
-	; Time Log Status Loggable
-	tlsl:
-		::tlsl::
-			GoSub fixwithflag
-			GoSub tlp4
-			SendInput Loggable****
-			return
+::tlp1::    ;Time Log Position 1 : Ticket number
+    goToPosition(1)
+    return
 
-	;;;;;;;;;;;;
-	;INTERNAL
-	;;;;;;;;;;;;
-		fix:
-			loop 5
-			{
-				sendinput ^z
-			}
-			sendinput {home}
-			return
+::tlp2::    ;Time Log Position 2 : Ticket Short Description
+    goToPosition(2)
+    return
 
+::tlp3::    ;Time Log Position 3 : Ticket Long Description
+    goToPosition(3)
+    return
 
-		; Time Log Toggle Variabl 'fixed'
-		tlfx:
-			::tlfx::
-				if fixed
-				{
-					gosub fix
-				}
-				fixed := !fixed
-				return
+::tlp4::    ;Time Log Position 4 : Status of the time log
+    goToPosition(4)
+    return
 
-		timelogtemplate:
-			gosub timelogcontent 
-			return
+::tlis::    ; Time Log Internal Support
+    insertTicketAndShortDescription(InternalSupportTicket)
+    return
 
+::tlsr::    ; Time Log Sprint Refining
+    insertTicketAndShortDescription(SprintRefiningTicket)
+    return
 
-		timelogcontent:
-			::timelogcontent::
-				send ******** | ********************** | ******************************************************************* | ************
-				return
+::tlko::	; Time Log Kick Off
+    insertTicketAndShortDescription("TE-13383 | Kickoff*************** |")
+    return
 
-		timelog:
-			::timelogstamp::
-				time += 1, minutes
-				FormatTime, timeandone, %time%, yy.MM.dd.HH:mm:00: ;format time to have seconds set to 00
-				FormatTime, CurrentDateTimeDay,, ddd
-				SendInput [%timeandone%
-				SendInput %CurrentDateTimeDay%]
-				time =
-				send {space}
-				return
+::tltl::	; Time Log Time Log
+    insertAtPositionAndComeBackAt(1,"******** | Time Logging********** |,3)
+    return
 
+::tlsl::       ; Time Log Status Loggable
+    tlsl()
+    return
 
-		fixwithflag:
-			if fixed
-			{
-				loop 5
-				{
-					sendinput ^z
-				}
-				fixed := true
-			}
-			return
+::tlst::
+    timelogstamp()
+    return
+
+;;;;;;;;;;;;;;;;
+;;;FUNCTIONS;;;;
+;;;;;;;;;;;;;;;;
+
+timelogcontent:
+    ::timelogcontent::
+        timelogcontent()
+        return
+
+timelogstamp()
+{
+    time += 1, minutes
+    FormatTime, timeandone, %time%, yy.MM.dd.HH:mm:00: ;format time to have seconds set to 00
+    FormatTime, CurrentDateTimeDay,, ddd
+    SendInput [%timeandone%
+    SendInput %CurrentDateTimeDay%]
+    time =
+    send {space}
+}
+
+tlsl()
+{
+    insertAtPositionAndComeBackAt(4,"Loggable****",3)
+}
+
+timelogcontent()
+{
+    send ******** | ********************** | ******************************************************************* | ************
+}
+
+goToPosition(position)
+{
+    if (position = 01)
+    {
+        number:=0
+    }
+    if (position = 1)
+    {
+        number:=24
+    }
+    if (position = 2)
+    {
+        number:=35
+    }
+    if (position = 3)
+    {
+        number:=60
+    }
+    if (position = 4)
+    {
+        number:=160
+    }
+    sendinput {home}
+    loop %number%
+    {
+        sendinput {right}
+    }
+}
+
+insertAtPositionAndComeBackAt(position,text,newPosition:=0)
+{
+    goToPosition(1)
+    SendInput %text%
+    goToPosition(newPosition)
+}
+insertTicketAndShortDescription(text)
+{
+    insertAtPosition(1, text )
+    tlsl()
+}
+outputJiraDate(daysToCount)
+{
+    FormatTime, CurrentDateTime,, d/MMM/yy
+    CurrentDateTime += daysToCount,days
+    SendInput %CurrentDateTime% 10:30 AM
+}
