@@ -22,30 +22,25 @@ InternalSupportTicket   := "TE-13382 | Internal support****** |"
 ;;;;; update regularly ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-tltd: 	        ; Time Log Ticket of the day
-    ::tltd::
-        insertTicketAndShortDescription(TicketOfTheDay)
-        return
+::tltd::    ; Time Log Ticket of the day
+    insertTicketAndShortDescription(TicketOfTheDay)
+    return
 
-tldt:           ; Time Log Deployment Ticket
-    ::tldt::
-        insertTicketAndShortDescription(DeploymentTicket)
-        return
+::tldt::    ; Time Log Deployment Ticket
+    insertTicketAndShortDescription(DeploymentTicket)
+    return
 
-tlpr:	        ; Time Log Pull Request
-    ::tlpr::
+::tlpr::    ; Time Log Pull Request
     insertTicketAndShortDescription(PullRequestTicket)
     return
 
-tlbm:	        ; Time Log Branch Management
-    ::tlbm::
-        insertTicketAndShortDescription(BranchManagementTicket)
-        return
+::tlbm::    ; Time Log Branch Management
+    insertTicketAndShortDescription(BranchManagementTicket)
+    return
 
-tlsp:	        ; Time Log Sprint Planning
-    ::tlsp::
-        insertTicketAndShortDescription(SprintPlanningTicket)
-        return
+::tlsp::    ; Time Log Sprint Planning
+    insertTicketAndShortDescription(SprintPlanningTicket)
+    return
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;Permanent
