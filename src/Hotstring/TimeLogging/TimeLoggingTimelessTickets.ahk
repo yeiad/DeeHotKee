@@ -1,4 +1,4 @@
-tlis::    ; Time Log Internal Support
+::tlis::    ; Time Log Internal Support
     fix()
     insertTicketAndShortDescription(InternalSupportTicket)
     return

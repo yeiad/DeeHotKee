@@ -1,4 +1,4 @@
-TimeLoggingFunction_timelogstamp()
+timelogstamp()
 {
     time += 1, minutes
     FormatTime, timeandone, %time%, yy.MM.dd.HH:mm:00: ;format time to have seconds set to 00
@@ -9,17 +9,17 @@ TimeLoggingFunction_timelogstamp()
     send {space}
 }
 
-TimeLoggingFunction_tlsl()
+tlsl()
 {
     insertAtPositionAndComeBackAt(4,"Loggable****",3)
 }
 
-TimeLoggingFunction_timelogcontent()
+timelogcontent()
 {
     send ******** | ********************** | ******************************************************************* | ************
 }
 
-TimeLoggingFunction_goToPosition(position)
+goToPosition(position)
 {
     if (position = 0)
     {
@@ -50,24 +50,24 @@ TimeLoggingFunction_goToPosition(position)
     }
 }
 
-TimeLoggingFunction_insertAtPositionAndComeBackAt(position,text,newPosition:=0)
+insertAtPositionAndComeBackAt(position,text,newPosition:=0)
 {
     goToPosition(position)
     Send %text%
     goToPosition(newPosition)
 }
-TimeLoggingFunction_insertTicketAndShortDescription(text)
+insertTicketAndShortDescription(text)
 {
     insertAtPosition(1, text)
     tlsl()
 }
 
-TimeLoggingFunction_insertAtPosition(position,text){
+insertAtPosition(position,text){
    goToPosition(position)
    Send %text%
 }
 
-TimeLoggingFunction_outputJiraDate(priorKey, daysToCount)
+outputJiraDate(priorKey, daysToCount)
 {
 	if (priorKey = "NumpadSub" || "NumpadSub")
 	{
@@ -80,7 +80,7 @@ TimeLoggingFunction_outputJiraDate(priorKey, daysToCount)
 
 }
 
-TimeLoggingFunction_fix(){
+fix(){
     loop 5
     {
         send ^z

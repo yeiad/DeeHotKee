@@ -5,8 +5,8 @@
     return
 
 ::tlnl::            ; Time Log New Line
-    TimeLoggingFunction_timelogstamp()
-    TimeLoggingFunction_timelogcontent()
+    timelogstamp()
+    timelogcontent()
     return
 
 
@@ -16,7 +16,7 @@
 ::jiradate-3::      ; Today's date in Jira's format, shift starts at 10:30
 ::jiradate-4::      ; Today's date in Jira's format, shift starts at 10:30
 ::jiradate-5::      ; Today's date in Jira's format, shift starts at 10:30
-    TimeLoggingFunction_outputJiraDate(A_PriorKey,A_EndChar)
+    outputJiraDate(A_PriorKey,A_EndChar)
     return
 
 timelogcontent:

@@ -1,26 +1,26 @@
 ::tlah::    ; Time Log Ticket of the day
-    TimeLoggingFunction_fix()
-    TimeLoggingFunction_insertTicketAndShortDescription(AdHockMeeting)
+    fix()
+    insertTicketAndShortDescription(AdHockMeeting)
     return
 
 ::tltd::    ; Time Log Ticket of the day
-    TimeLoggingFunction_fix()
-    TimeLoggingFunction_insertTicketAndShortDescription(TicketOfTheDay)
+    fix()
+    insertTicketAndShortDescription(TicketOfTheDay)
     return
 
 ::tldp::    ; Time Log Deployment Ticket
-    TimeLoggingFunction_fix()
-    TimeLoggingFunction_insertTicketAndShortDescription(DeploymentTicket)
+    fix()
+    insertTicketAndShortDescription(DeploymentTicket)
     return
 
 ::tlpr::    ; Time Log Pull Request
-    TimeLoggingFunction_fix()
-    TimeLoggingFunction_insertTicketAndShortDescription(PullRequestTicket)
+    fix()
+    insertTicketAndShortDescription(PullRequestTicket)
     return
 
 ::tlsp::    ; Time Log Sprint Planning
-    TimeLoggingFunction_fix()
-    TimeLoggingFunction_insertTicketAndShortDescription(SprintPlanningTicket)
+    fix()
+    insertTicketAndShortDescription(SprintPlanningTicket)
     return
 
 

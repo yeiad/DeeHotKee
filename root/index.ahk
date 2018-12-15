@@ -4,5 +4,5 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 
-#include %A_ScriptDir%\..\Core\Bootstrap.ahk
-#include %A_ScriptDir%\..\Core\Launch.ahk
+#include %A_MyDocuments%\hotkeys\DeeHotKee\src\Core\Bootstrap.ahk
+#include %A_MyDocuments%\hotkeys\DeeHotKee\src\Core\Launch.ahk
