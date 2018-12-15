@@ -1,6 +1,6 @@
 logspath                :=  A_MyDocuments .  "\logs\"               ;   tlsf
 
-TicketOfTheDay          := "TE-13486 | Redirect by GEO******* |"    ;   tltd
+TicketOfTheDay          := "TE-14014 | Page 2**************** |"    ;   tltd
 
 DeploymentTicket        := "TE-14056 | Deployment XXXMas [be] |"    ;   tldp
 PullRequestTicket       := "TE-14059 | [BE] PR Reviews XXXMAS |"    ;   tlpr
