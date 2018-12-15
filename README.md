@@ -1,9 +1,13 @@
-# NotepadTimeLogging
-Autohotkey script used to log time in notepad++ and later in JIRA
+# DeeHotKee
+Autohotkey project used daily to fascilitate my work as a developer. Here's a list of what it helps with:
+  -Time stamping
+  -Comments blocks with timestamps for notepad
+  -Log time in notepad++ and JIRA
+  -Write notes, comments
+  -Git Branch fetching
 
 Purpose:
-  Make time logging accurate
-  Make time logging instantaneous and second nature
+  Speed up working process and help writing notes
 
 Requirements:
   Excel
