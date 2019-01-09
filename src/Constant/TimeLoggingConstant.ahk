@@ -1,6 +1,6 @@
 logspath                :=  A_MyDocuments .  "\logs\"               ;   tlsf
 
-TicketOfTheDay          := "TE-12043 | Filters return no resu |"    ;   tltd
+TicketOfTheDay          := "TE-14262 | Seperating Videos XML* |"    ;   tltd
 
 DeploymentTicket        := "TE-14056 | Deployment XXXMas [be] |"    ;   tldp
 PullRequestTicket       := "TE-14059 | [BE] PR Reviews XXXMAS |"    ;   tlpr
