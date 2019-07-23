@@ -76,8 +76,6 @@ outputJiraDate(priorKey, daysToCount)
 		FormatTime,today,% date, d/MMM/yy
 		Send % (today . " 10:30 AM")
 	}
-
-
 }
 
 fix(){
