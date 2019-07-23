@@ -23,8 +23,6 @@
     insertTicketAndShortDescription(SprintPlanningTicket)
     return
 
-
-
 ::tlsr::    ; Time Log Sprint Refining
     fix()
     insertTicketAndShortDescription(SprintRefiningTicket)

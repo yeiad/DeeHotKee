@@ -1,17 +1,12 @@
-﻿;-------------------------------------------------------
+﻿
+;-------------------------------------------------------
 ;General
 ;-------------------------------------------------------
 
 
-	;Increase and decrease volume
-	#!WheelUp::Send {Volume_Up}
-	#!WheelDown::Send {Volume_Down}
-	
-
-
 	nppnl:
 		::nppnl::
-			Send -------------------------------------------------------
+			SendInput -------------------------------------------------------
 			return
 
 	timestamp:
@@ -20,65 +15,65 @@
 			FormatTime, CurrentDateTimeDay,, ddd
 			SendInput [%CurrentDateTime%
 			SendInput %CurrentDateTimeDay%]
-			send {space}
+			SendInput {space}
 			return
 
 
 	nppntc:
 		::nppntc::
-			send ^{Home}
+			SendInput ^{Home}
 			gosub nppnl
-			send {enter}
+			SendInput {enter}
 			gosub timestamp
-			send {enter}
+			SendInput {enter}
 			gosub nppnl
-			send {enter}
+			SendInput {enter}
 			gosub t8gitbranch
 			gosub nppnl
 			loop 3 
 			{
-			send {Enter}
-			send {Up}
+			SendInput {Enter}
+			SendInput {Up}
 			}
 			gosub nppnl
-			send {enter}{enter}
+			SendInput {enter}{enter}
 			return
 
 	nppnc:
 		::nppnc::
-			send ^{Home}
+			SendInput ^{Home}
 			gosub nppnl
-			send {enter}
+			SendInput {enter}
 			gosub timestamp
-			send {enter}
+			SendInput {enter}
 			gosub nppnl
 			loop 3 
 			{
-			send {Enter}
-			send {Up}
+			SendInput {Enter}
+			SendInput {Up}
 			}
 			gosub nppnl
-			send {enter}{enter}
+			SendInput {enter}{enter}
 			return
 
 	onnc:
 		::onnc::
 			gosub nppnc
-			send, {Up}
-			send, {enter}
-			send, {up}
+			SendInput, {Up}
+			SendInput, {enter}
+			SendInput, {up}
 			return
 
 	nlabove:
 		::nlabove::
-			send ^{Home}
-			send {enter}
-			send {up}
+			SendInput ^{Home}
+			SendInput {enter}
+			SendInput {up}
 
 	t8gitbranch:
 		::gett8gitbranch::
 			Run, cmd.exe /k cd "C:\Users\e_yacoub\PhpstormProjects\tube8.front" & git branch | find "*" | clip && exit
-			send ^v
+			SendInput ^v
 			return
 
 
@@ -88,10 +83,10 @@
 			{
 				MouseClick
 			}
-			Send #
+			SendInput #
 			return
 
 	todo:
 		::todo::
-			send //TODO{space}
+			SendInput //TODO{space}
 			return

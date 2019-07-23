@@ -6,7 +6,7 @@ timelogstamp()
     SendInput [%timeandone%
     SendInput %CurrentDateTimeDay%]
     time =
-    send {space}
+    sendinput {space}
 }
 
 tlsl()
@@ -16,7 +16,7 @@ tlsl()
 
 timelogcontent()
 {
-    send ******** | ********************** | ******************************************************************* | ************
+    sendinput ******** | ********************** | ******************************************************************* | ************
 }
 
 goToPosition(position)
@@ -42,18 +42,18 @@ goToPosition(position)
         number:=130
     }
 
-    Send {home}
+    SendInput {home}
 
     loop %number%
     {
-        Send {right}
+        SendInput {right}
     }
 }
 
 insertAtPositionAndComeBackAt(position,text,newPosition:=0)
 {
     goToPosition(position)
-    Send %text%
+    SendInput %text%
     goToPosition(newPosition)
 }
 insertTicketAndShortDescription(text)
@@ -64,7 +64,7 @@ insertTicketAndShortDescription(text)
 
 insertAtPosition(position,text){
    goToPosition(position)
-   Send %text%
+   SendInput %text%
 }
 
 outputJiraDate(priorKey, daysToCount)
@@ -74,14 +74,14 @@ outputJiraDate(priorKey, daysToCount)
 		date := a_now
 		date += daysToCount, D
 		FormatTime,today,% date, d/MMM/yy
-		Send % (today . " 10:30 AM")
+		SendInput % (today . " 10:30 AM")
 	}
 }
 
 fix(){
     loop 5
     {
-        send ^z
+        SendInput ^z
     }
 }
 

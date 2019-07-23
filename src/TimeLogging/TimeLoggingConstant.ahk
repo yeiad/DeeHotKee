@@ -9,5 +9,4 @@ SprintPlanningTicket    := "TE-xxxxx | Sprint Planning******* |"    ;   tlsp
 SprintRefiningTicket    := "TE-15980 | Sprint Activities***** |"    ;   tlsr Weekly estimates, kickoffs, Timeboxing, retros
 InternalSupportTicket   := "TE-15979 | Internal support****** |"    ;   tlis
 AdHockMeeting			:= "TE-15981 | Ad-hoc meetings******* |"    ;   tlah
-
 needsFix                := true
