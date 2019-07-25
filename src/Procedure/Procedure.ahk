@@ -125,37 +125,39 @@ DeployToProdChecklist =
 DeployToProdTemplate =
 (
 
--------------------------------------------------------
-[release name] | [release jira link]
+[RELEASE NAME]	| [RELEASE JIRA URL]
 
 Envolved Party:
-	[list of taggable in MS teams]
+	[LIST OF ENVOLVED PEOPLE]
+
+Testing Party:
+	[LIST OF TESTING PEOPLE]
+
+Deployment Ticket:
+	[JIRA TICKET FOR DEPLOYMENT]
 
 MS Teams:
-	[MS Teams Conversation]
+    [TEAMS.MICROSOFT.COM URL]
 
-DEPLOYMENT TICKET NOTES:
-{code:java}
 Conflicting PRs:
-	TICKET		PR ID	DEV		DEST
-	__________________________________
-	N/A			N/A		N/A		N/A
+[LIST][PRS: PR ID, JIRA TICKET, TICKET ASSIGNEE]
 
 Conflicting releases:
-	STATUS		| RELEASE					| COMMIT
+	STATUS		| RELEASE											| COMMIT
 	__________________________________________________________________________________________
-	N/A			| N/A						| N/A
+	[RESOLVED/NOT RESOLVED/	| [CONFLICTING RELEASE NAME]					| [COMMIT HASH]
     -------------------------------------------------------
-    Conflicting files in [destination release name]:
-        [CONFLICTING FILE]
+    Conflicting files in [CONFLICTING RELEASE NAME]:
+        [CONFCLITING FILE RELATIVE PATH]
 
-MS Teams Thread:
-	[MS TEAMS LINK]
+DEPLOYMENT TICKET NOTES:
+
+Caused conflicts with:
+[LIST][RESOLVED/NOT RESOLVED/	| [CONFLICTING RELEASE NAME]
+[LIST][PRS: PR ID, JIRA TICKET, TICKET ASSIGNEE]
 
 Deployment link:
-	[BAMBOO TE-XXXXX-X LINK]
-{code}
--------------------------------------------------------
+	[BAMBOO LINK FOR DEPLOYED BUILD]
 )
     return
 
