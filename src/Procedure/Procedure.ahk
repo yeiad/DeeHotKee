@@ -1,7 +1,7 @@
 DefineProcedureconstants:
     DailyProcedureChecklist =
     (
-[ ] DAILY PROCEDURE ***************************************************
+[ ] DAILY PROCEDURE
     [ ] Look at calendar for appointments for the day and the week*********
     [ ] Read what was done yesterday***************************************
     [ ] Carryover backlog of uncompleted tasks to today********************
@@ -42,12 +42,9 @@ DefineProcedureconstants:
     [ ] Log yesterdays' BM related problems********************************
     - -----------------------------------------------------
     [ ] Prepare tomorrows' SCRUM*******************************************
-    [ ] Go through the sometimes checklist*********************************
     - -----------------------------------------------------
     [ ] Weekday PROCEDURE**************************************************
     [ ] Update procedure***************************************************
-    [ ] *******************************************************************
-
 )
 DeployToProdChecklist =
 (
