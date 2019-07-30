@@ -55,7 +55,7 @@ DeployToProdChecklist =
 	[ ] Name the testing party
 	[ ] Name Deployment ticket
 	[ ] Confirm that it is not Friday
-	[ ] Confirm that testing party will ther 1h post-deployment
+	[ ] Confirm that testing party will there 1h post-deployment
 	[ ] Confirm that Testing party isn't on lunch
 	[ ] Get Confirmation from Deployment Admins that deployment is a go
 	[ ] Get Confirmation from QA release is ready to deploy
@@ -65,7 +65,7 @@ DeployToProdChecklist =
 	[ ] Copy link for thread
 	[ ] check linked tickets (blocks, fixes)
 	[ ] check subtasks
-	[ ] Investigate tickets with no merged code and no 19.NoCode fixversion
+	[ ] ?? Investigate tickets with no merged code and no 19.NoCode fixversion
 	[ ] Ensure all tickets are 'verified'
 	[ ] Compare diff master to release
 	[ ] Compare diff currently deployed branch to release
@@ -76,16 +76,17 @@ DeployToProdChecklist =
 	[ ] Inform team I'm about to deploy
 	[ ] Attempt a deployment
 	[ ] If json feed is created | set an alarm to check when the deployment gets live
-	[ ] If deployment fails, try again in 10 minutes
+	[ ] If deployment fails | try again in 10 minutes
 	[ ] Confirm that deployment is live
 	[ ] Communicate with team when deployment is live
+	[ ] Ask QA to check Deployment checklist
+    [ ] Sign In, Videos Play, Ads work, PreRolls, DMCA, Pagination, Search
 	[ ] post-deploy Command to run
 	[ ] Set alarms to check the graphs
 	[ ] Check the graphs
 	[ ] Communicate with team about graphs
 	[ ] Do quick test of deployment
 	[ ] If broken Revert to last stable build
-	[ ] Ask QA to do p1 checklist before merging
 	[ ] Create a PR from release branch to master
 	[ ] Quickly go through code make sure there are no blantant errors
 	[ ] If errors | Calmly analyze impact and major risks
@@ -110,7 +111,7 @@ DeployToProdChecklist =
 	[ ] if QA gives p1 approval | Merge deployed branch in master
 	[ ] Run update release branches script
 	[ ] Procedure | Conflict Management
-	[ ] Write in MS Teams Thread the conflict notes
+	[ ] Open tickets for conflicts
 	[ ] Write Deployment Notes For Jira Deployment Ticket on deployment ticket
 	[ ] Remove release from tabs outliner
 	[ ] Check all task boxes for that deployment in tasks
