@@ -8,11 +8,12 @@ DefineProcedureconstants:
     [ ] Copy order of priorities of releases*******************************
     [ ] Update the backlog of tasks****************************************
     [ ] Read unread emails*************************************************
+	[ ] Read useless emails************************************************
     [ ] Follow up emails***************************************************
     [ ] Skim through All mail**********************************************
     [ ] Log missing work in jira*******************************************
     [ ] Save records of work notes*****************************************
-    [ ] Make sure my tickets have the right statuses***********************
+    [ ] Make sure my 'in progress' tickets are actually in progress********
     [ ] Read communication on teams
         ******************Daily Deployment Tasks***************************
     [ ] Update all unreleased releases with master*************************
@@ -54,6 +55,8 @@ DeployToProdChecklist =
 	[ ] Name the envolved party
 	[ ] Name the testing party
 	[ ] Name Deployment ticket
+	[ ] Start an MS Teams Thread about the release
+	[ ] Copy link for thread
 	[ ] Confirm that it is not Friday
 	[ ] Confirm that testing party will there 1h post-deployment
 	[ ] Confirm that Testing party isn't on lunch
@@ -65,7 +68,7 @@ DeployToProdChecklist =
 	[ ] Copy link for thread
 	[ ] check linked tickets (blocks, fixes)
 	[ ] check subtasks
-	[ ] ?? Investigate tickets with no merged code and no 19.NoCode fixversion
+	[ ] Investigate tickets with no merged code in the release
 	[ ] Ensure all tickets are 'verified'
 	[ ] Compare diff master to release
 	[ ] Compare diff currently deployed branch to release
@@ -74,6 +77,7 @@ DeployToProdChecklist =
 	[ ] If it's a hotfix | Createa a bamboo build
 	[ ] Run Pre-Deployment Commands to run
 	[ ] Inform team I'm about to deploy
+	[ ] Before every attempt of deployment make sure QA is available
 	[ ] Attempt a deployment
 	[ ] If json feed is created | set an alarm to check when the deployment gets live
 	[ ] If deployment fails | try again in 10 minutes
@@ -85,7 +89,7 @@ DeployToProdChecklist =
 	[ ] Set alarms to check the graphs
 	[ ] Check the graphs
 	[ ] Communicate with team about graphs
-	[ ] Do quick test of deployment
+	[ ] Do quick test of deployment (QA)
 	[ ] If broken Revert to last stable build
 	[ ] Create a PR from release branch to master
 	[ ] Quickly go through code make sure there are no blantant errors
@@ -108,8 +112,9 @@ DeployToProdChecklist =
 	[ ] If inform_stakeholder | Inform stakeholder
 	[ ] If inform_stakeholder | Remove the label
 	[ ] Check the graph
-	[ ] if QA gives p1 approval | Merge deployed branch in master
+	[ ] if QA gives approval | Merge deployed branch in master
 	[ ] Run update release branches script
+	[ ] Note conflicting releases
 	[ ] Procedure | Conflict Management
 	[ ] Open tickets for conflicts
 	[ ] Write Deployment Notes For Jira Deployment Ticket on deployment ticket
