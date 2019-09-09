@@ -5,17 +5,19 @@ DefineProcedureconstants:
     [ ] Look at calendar for appointments for the day and the week*********
     [ ] Read what was done yesterday***************************************
     [ ] Carryover backlog of uncompleted tasks to today********************
-    [ ] Copy order of priorities of releases*******************************
     [ ] Update the backlog of tasks****************************************
     [ ] Read unread emails*************************************************
 	[ ] Read useless emails************************************************
     [ ] Follow up emails***************************************************
     [ ] Skim through All mail**********************************************
+	[ ] Go through DayForce messages***************************************
     [ ] Log missing work in jira*******************************************
-    [ ] Save records notes from daily work*********************************
-    [ ] Save records notes from templates**********************************
-    [ ] Save records notes from script*************************************
-    [ ] Save records notes from procedures*********************************
+	[ ] Save records from daily notes**************************************
+	[ ] Save records from daily timelogs***********************************
+	[ ] Save records from daily mistakes***********************************
+	[ ] Save records from daily filled templates***************************
+	[ ] Save records from daily filled procedures**************************
+    [ ] Save records from daily script results*****************************
     [ ] Make sure my 'in progress' tickets are actually in progress********
     [ ] Read communication on teams
         ******************Daily Deployment Tasks***************************
@@ -25,27 +27,19 @@ DefineProcedureconstants:
     [ ] Make sure the PRs have proper destinations*************************
     [ ] Make sure PR's with SA destination has a fixVersion****************
     [ ] Make sure PR's that need work have a reopened ticket***************
-    [ ] Make sure 'No fixVersion' filter in Jira is empty******************
-    [ ] Process Resolved Tickets with fixversion and ummerged pr***********
-    [ ] Process Resolved Tickets with no code******************************
-    [ ] Merge Resolved tickets with a fixVersion***************************
     [ ] Review Hotfix Jira Filter******************************************
     [ ] Ask Why is a hotfix blocked****************************************
     [ ] Review Hotfix Releases*********************************************
     [ ] Review 19.Hotfix Release*******************************************
     [ ] Note status of all releasables*************************************
     [ ] Communicate status of releases to team*****************************
-    - ---------------DEPLOYMENTS---------------------------
     [ ] Add tasks for releases that need action****************************
     - -----------------------------------------------------
     [ ] Review PRs on which I am a reviewer********************************
     [ ] Follow up on my PRs************************************************
     - -----------------------------------------------------
-    [ ] Log yesterdays' weekday work done**********************************
     [ ] Log yesterdays' mistakes*******************************************
     [ ] Log yesterdays' BM related problems********************************
-    - -----------------------------------------------------
-    [ ] Prepare tomorrows' SCRUM*******************************************
     - -----------------------------------------------------
     [ ] Weekday PROCEDURE**************************************************
     [ ] Update procedure***************************************************
@@ -61,10 +55,10 @@ DeployToProdChecklist =
 	[ ] QA OK to go
 	[ ] BE Devs OK to go
 	[ ] 3rd party OK to go
-	[ ] Check 'inform_stakeholder' label
 	[ ] Open MS Teams Thread
 	[ ] Fill Procedure Template
 	[ ] Check linked tickets (blocks, fixes)
+	[ ] Check 'inform_stakeholder' label
 	[ ] check subtasks
 	[ ] Investigate tickets with no merged code in the release
 	[ ] Ensure all tickets are 'verified'
@@ -120,7 +114,6 @@ DeployToProdChecklist =
 	[ ] Note conflicting releases
 	[ ] Procedure | Conflict Management
 	[ ] Open tickets for conflicts
-	[ ] Remove release from tabs outliner
 	[ ] Check all task boxes for that deployment in tasks
 	[ ] Update templates for this procedure
 	[ ] Update this procedure
@@ -237,16 +230,147 @@ FindReleaseNameChecklist =
 (
 [ ] FIND RELEASE NAME
 	[ ] Open templates for procedure
-	[ ] Create identifier
-	[ ] Create suffix
-	[ ] Create label
-	[ ] Create fixversion with fixVersion name
-	[ ] Prioratize fixversion
-	[ ] Create a release ticket
-	[ ] Create a branch with fixVersion name
-	[ ] Add fixVersion to update branches script
-	[ ] Add release to whiteboard
+	[ ] Specify identifier
+	[ ] Specify prefix
+	[ ] Specify suffix
+	[ ] Specify label
+	[ ] generate fixVersion name
+	[ ] Create a fixVersion in Jira with the fixVersion name
+	[ ] Add start date to fixVersion
+	[ ] Prioratize fixVersion in the release management board
+	[ ] Create a branch from master with a name identical to the fixVersion name
+	[ ] Add the fixVersion name to the "update branches script"
+	[ ] Add release label to whiteboard's calendar
+	[ ] Add release label to whiteboard's list of releases
 	[ ] Update Procedure
+
+)
+
+EssentialDeploymentToProdChecklist =
+(
+
+[ ] DEPLOYMENT OF RELEASE TO PRODUCTION - ESSENTIALS
+	[ ] If there is any questions or unaccounted situation, please refer to BM
+	[ ] Not Friday
+	[ ] Testers are available for 1h
+	[ ] Testers not on lunch
+	[ ] Testers OK to go
+	[ ] BE Devs OK to go
+	[ ] Open MS Teams Thread
+	[ ] Fill Procedure Template
+	[ ] Proceed with PRE-DEPLOYMENT RELEASE VALIDATION procedure
+	[ ] Proceed with DEPLOYMENT NOTICES VALIDATION procedure
+	[ ] If Deploy tasks | Execute pre-deployment tasks
+	[ ] Ensure Testers are available before every deployment attempt
+	[ ] Inform team via the Thread that Deployment is about to take place
+	[ ] Inform team via the Thread of any hiccups during deployment
+	[ ] Attempt a deployment
+	[ ] Ensure the deployment is live
+	[ ] Inform team via the Thread that the deployment is live
+	[ ] Ask QA to proceed with quick checks: Sign In, Videos Play, Ads work, PreRolls, DMCA, Pagination, Search, Mobile Popunders
+	[ ] If Deploy tasks | Post-deploy Command to run
+	[ ] Set alarms to check the graphs
+	[ ] Check the graphs
+	[ ] Insert a screenshot of the graphs in the Thread
+	[ ] Quickly go through code make ensure there are no blantant errors
+	[ ] Update tickets status to deployed
+	[ ] Change status of fixVersion to released
+	[ ] Set deployment date of fixVersion
+	[ ] Inform BM of the deployment
+	[ ] Remove release from release branches update script
+	[ ] Send an email to PM for the deployment with the subject 'RE: Tube8 Q3 Deployments'
+	[ ] On the whiteboard, write the release name on the date of deployment and cross it
+	[ ] On the whiteboard, erease release off the list of releases
+	[ ] Insert a comment in the release ticket with the filled template from this procedure
+	[ ] If inform_stakeholder | Inform stakeholder
+	[ ] If inform_stakeholder | Remove the label
+	[ ] Check the graph
+	[ ] Get QA's approval for the quick checks
+	[ ] Ensure QA approve the quick checksif QA gives approval
+	[ ] Merge deployed branch in master
+	[ ] Run update release branches script
+	[ ] Run postdeployment deployment script
+	[ ] Run AnalyzePullRequests deployment script
+[ ] PRE-DEPLOYMENT RELEASE VALIDATION
+	[ ] Ensure absence of bogus commits
+	[ ] Ensure depending on tickets are done
+	[ ] Ensure subtasks are done
+	[ ] Ensure there are no tickets with no merged code
+	[ ] Ensure all tickets are verified
+	[ ] Ensure QA has done basic validation of release
+	[ ] Ensure release branch is up to date with master
+	[ ] Ensure release branch is up to date with branch currently deployed to production environment
+[ ] DEPLOYMENT NOTICES VALIDATION
+	[ ] Check 'inform_stakeholder' label
+	[ ] Check 'deploy-tasks' label
+	[ ] Check 'command-to-run' label
+	[ ] Check 'deploy-task' label
+
+)
+
+EssentialReleaseCreationChecklist =
+(
+
+[ ] RELEASE SETUP - ESSENTIAL
+	[ ] Report any un-accounted scenario to the Build Master
+	[ ] proceed with PRE-RELEASE RELEASE BASIC CHECKS
+	[ ] List the tickets of the release
+	[ ] Proceed with PRE-RELEASE TICKETS BASIC CHECKS on every ticket
+	[ ] Determine priority of release
+	[ ] Proceed with FIND RELEASE NAME procedure
+	[ ] Procedure with STAGING ESSENTIAL procedure
+	[ ] Foreach ticket proceed with PUT RESOLVED TICKET IN RELEASE proceedure
+	[ ] Run PostReleaseCreationValidation Command - creates a release ticket (ask BM)
+	[ ] Inform team of the new release
+	[ ] Copy communication reference to release ticket
+[ ] PRE-RELEASE RELEASE BASIC CHECKS
+	[ ] Pull request destination's HEAD is the same as master's HEAD
+[ ] PRE-RELEASE TICKETS BASIC CHECKS
+	[ ] Open ticket PR in Stash
+	[ ] Ensure the destination is pull request destination
+	[ ] Ensure there is no conflict
+	[ ] Determine if PR contains BE, FE code
+	[ ] Ensure there are appropriate approvers
+	[ ] Ensure there are adequate approvals
+	[ ] Ensure there are no commit messages with different tickets
+	[ ] Open Jira ticket
+	[ ] Ensure there is no fixVersion
+	[ ] Check Sub Tasks: ensure they are done
+	[ ] Check Parent Task: ensure it's part of the release
+	[ ] Check Sibling Task: ensure it's part of the release
+	[ ] Check 'fixes' link: include ticket in release
+	[ ] Check 'fixed by' link: ensure ticket is done
+	[ ] Check 'FS-depended by' link: ensure ticket is done
+	[ ] Check 'FS-depended on' link: ensure ticket is in release
+	[ ] Check 'Blocked by' links: ensure ticket is done
+	[ ] Ensure ticket status is 'resolved'
+[ ] FIND RELEASE NAME
+	[ ] Open templates for procedure
+	[ ] Specify identifier
+	[ ] Specify prefix
+	[ ] Specify suffix
+	[ ] Specify label
+	[ ] generate fixVersion name
+	[ ] Create a fixVersion in Jira with the fixVersion name
+	[ ] Add start date to fixVersion
+	[ ] Prioratize fixVersion in the release management board
+	[ ] Create a branch from master with a name identical to the fixVersion name
+	[ ] Add the fixVersion name to the "update branches script" (ask BM)
+	[ ] Add release label to whiteboard's calendar
+	[ ] Add release label to whiteboard's list of releases
+[ ] STAGING ESSENTIAL
+	[ ] Find Available Stage
+	[ ] Add the Stage name as a description to the fixVersion
+	[ ] Setup autodeployment on the stage environment
+	[ ] Deploy the build to the stage environment
+[ ] PUT RESOLVED TICKET IN RELEASE
+	[ ] Open Jira Ticket
+	[ ] Set the fixVersion on the ticket
+	[ ] Open Stash
+	[ ] Change PR destination to the release branch
+	[ ] Merge PR
+	[ ] Open Jira Ticket
+	[ ] Set status to On Stage
 
 )
 
@@ -379,7 +503,7 @@ TIMESTAMP:
 RELEASE INFORMATION:
 [RELEASE NAME]|[RELEASE JIRA URL]
 
-ENVOLVED PARTY:
+INVOLVED PARTY:
 	[LIST OF ENVOLVED PEOPLE]
 
 TESTING PARTY:
@@ -478,5 +602,17 @@ DeployHotfixToProdChecklist  =
 ::prdphfprte::
     gosub DefineProcedureconstants
     Clipboard := DeployHotfixToProdTemplate . FindReleaseNameTemplate . DeployToProdTemplate
+    SendInput ^v
+    return
+
+::prcrreesch::
+    gosub DefineProcedureconstants
+    Clipboard := EssentialReleaseCreationChecklist
+    SendInput ^v
+    return
+
+::prdppresch::
+    gosub DefineProcedureconstants
+    Clipboard := EssentialDeploymentToProdChecklist
     SendInput ^v
     return
