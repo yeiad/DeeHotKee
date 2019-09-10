@@ -22,14 +22,9 @@ DefineProcedureconstants:
     [ ] Read communication on teams
         ******************Daily Deployment Tasks***************************
     [ ] Update all unreleased releases with master*************************
-    [ ] Process conflicting PRs********************************************
-    [ ] Make sure PRs have reviewers***************************************
-    [ ] Make sure the PRs have proper destinations*************************
-    [ ] Make sure PR's with SA destination has a fixVersion****************
-    [ ] Make sure PR's that need work have a reopened ticket***************
-    [ ] Review Hotfix Jira Filter******************************************
-    [ ] Ask Why is a hotfix blocked****************************************
-    [ ] Review Hotfix Releases*********************************************
+    [ ] Execute Deployment scrpts******************************************
+    [ ] Open and process Hotfix Jira Filter********************************
+    [ ] Follow up on Hotfix Releases***************************************
     [ ] Review 19.Hotfix Release*******************************************
     [ ] Note status of all releasables*************************************
     [ ] Communicate status of releases to team*****************************
@@ -37,9 +32,6 @@ DefineProcedureconstants:
     - -----------------------------------------------------
     [ ] Review PRs on which I am a reviewer********************************
     [ ] Follow up on my PRs************************************************
-    - -----------------------------------------------------
-    [ ] Log yesterdays' mistakes*******************************************
-    [ ] Log yesterdays' BM related problems********************************
     - -----------------------------------------------------
     [ ] Weekday PROCEDURE**************************************************
     [ ] Update procedure***************************************************
@@ -77,44 +69,25 @@ DeployToProdChecklist =
 	[ ] Communicate with team when deployment is live
 	[ ] Ask QA to check Sign In, Videos Play, Ads work, PreRolls, DMCA, Pagination, Search, Mobile Popunders
 	[ ] If Deploy tasks | Post-deploy Command to run
-	[ ] Set alarms to check the graphs
 	[ ] Check the graphs
 	[ ] Communicate with team about graphs
-	[ ] Quickly go through code make sure there are no blantant errors
-	[ ] If errors | Calmly analyze impact and major risks
-	[ ] If errors | Take Damage Control actions
-	[ ] If errors | Check Documented similar mistakes
-	[ ] If errors | Find the exact cause of the issue
-	[ ] If errors | Inform the team about the mistake
-	[ ] If errors | Document Mistake and cause
-	[ ] If errors | Discuss with team solutions
-	[ ] If errors | Add task to discuss mitigation with team
-	[ ] If errors | Add task to Document action taken, solutions, mitigations, causes, etc
-	[ ] If errors | Wait for situation to be contained before proceeding
+	[ ] Verify Code Diff Quickly
+	[ ] If code issues proceed with BAD CODE ON PROD procedure
 	[ ] Update tickets status to deployed
 	[ ] Change status of fixVersion
 	[ ] Set release date of fixVersion
-	[ ] remove releases from notepad++
 	[ ] remove release from script
-	[ ] If Hotfix | write on board
 	[ ] Send an email to PM for the deployment
 	[ ] Cross releases off the board
 	[ ] Erease release off the board
 	[ ] Write Deployment Notes For Jira Deployment Ticket on deployment ticket
-	[ ] If inform_stakeholder | Inform stakeholder
-	[ ] If inform_stakeholder | Remove the label
 	[ ] Check the graph
 	[ ] Get QA's approval
-	[ ] if QA gives approval | Merge deployed branch in master
-	[ ] If broken | Revert to last stable build
+	[ ] Merge Release In Master IF APPROVED
 	[ ] Run update release branches script
-	[ ] If there has been multiple releases in the day, forceFixVersion in postdeployment script
+	[ ] forceFixVersion in postdeployment script
 	[ ] Run postdeployment deployment script
 	[ ] Run AnalyzePullRequests deployment script
-	[ ] Note conflicting releases
-	[ ] Procedure | Conflict Management
-	[ ] Open tickets for conflicts
-	[ ] Check all task boxes for that deployment in tasks
 	[ ] Update templates for this procedure
 	[ ] Update this procedure
 

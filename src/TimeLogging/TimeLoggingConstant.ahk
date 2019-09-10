@@ -3,7 +3,7 @@ logspath                :=  A_MyDocuments .  "\logs\"               ;   tlsf
 TicketOfTheDay          := "TE-15500 | CMS Push Notification* |"    ;   tltd
 
 DeploymentTicket        := "TE-16405 | Deployment************ |"    ;   tldp
-ServerMaintenanceTicket := "TE-16406 | Deployment************ |"    ;   tldp
+ServerMaintenanceTicket := "TE-16406 | Server Maintenance**** |"    ;   tldp
 PullRequestTicket       := "TE-xxxxx | PR Reviews************ |"    ;   tlpr
 
 SprintPlanningTicket    := "TE-xxxxx | Sprint Planning******* |"    ;   tlsp
