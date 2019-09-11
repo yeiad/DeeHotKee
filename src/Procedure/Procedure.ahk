@@ -300,6 +300,7 @@ EssentialReleaseCreationChecklist =
 	[ ] Run PostReleaseCreationValidation Command - creates a release ticket (ask BM)
 	[ ] Inform team of the new release
 	[ ] Copy communication reference to release ticket
+	[ ] Update procedure
 [ ] PRE-RELEASE RELEASE BASIC CHECKS
 	[ ] Pull request destination's HEAD is the same as master's HEAD
 [ ] PRE-RELEASE TICKETS BASIC CHECKS
