@@ -294,6 +294,7 @@ EssentialReleaseCreationChecklist =
 	[ ] Proceed with PRE-RELEASE TICKETS BASIC CHECKS on every ticket
 	[ ] Determine priority of release
 	[ ] Proceed with FIND RELEASE NAME procedure
+	[ ] Proceed with CREATE FIXVERSION procedure
 	[ ] Procedure with STAGING ESSENTIAL procedure
 	[ ] Foreach ticket proceed with PUT RESOLVED TICKET IN RELEASE proceedure
 	[ ] Run PostReleaseCreationValidation Command - creates a release ticket (ask BM)
@@ -302,6 +303,7 @@ EssentialReleaseCreationChecklist =
 [ ] PRE-RELEASE RELEASE BASIC CHECKS
 	[ ] Pull request destination's HEAD is the same as master's HEAD
 [ ] PRE-RELEASE TICKETS BASIC CHECKS
+	[ ] Execute the script PreReleaseTicketBasicChecks on the tickets
 	[ ] Open ticket PR in Stash
 	[ ] Ensure the destination is pull request destination
 	[ ] Ensure there is no conflict
@@ -327,6 +329,7 @@ EssentialReleaseCreationChecklist =
 	[ ] Specify suffix
 	[ ] Specify label
 	[ ] generate fixVersion name
+[ ] CREATE FIXVERSION
 	[ ] Create a fixVersion in Jira with the fixVersion name
 	[ ] Add start date to fixVersion
 	[ ] Prioratize fixVersion in the release management board
