@@ -255,15 +255,15 @@ EssentialDeploymentToProdChecklist =
 	[ ] On the whiteboard, write the release name on the date of deployment and cross it
 	[ ] On the whiteboard, erease release off the list of releases
 	[ ] Insert a comment in the release ticket with the filled template from this procedure
-	[ ] If inform_stakeholder | Inform stakeholder
-	[ ] If inform_stakeholder | Remove the label
-	[ ] Check the graph
 	[ ] Get QA's approval for the quick checks
-	[ ] Ensure QA approve the quick checksif QA gives approval
+	[ ] Ensure QA approve the quick checks
+	[ ] Check the graph
 	[ ] Merge deployed branch in master
 	[ ] Run update release branches script
 	[ ] Run postdeployment deployment script
 	[ ] Run AnalyzePullRequests deployment script
+	[ ] proceed with POST-DEPLOYMENT CHECKS procedure
+	[ ] Update this procedure
 [ ] PRE-DEPLOYMENT RELEASE VALIDATION
 	[ ] Ensure absence of bogus commits
 	[ ] Ensure depending on tickets are done
@@ -278,6 +278,9 @@ EssentialDeploymentToProdChecklist =
 	[ ] Check 'deploy-tasks' label
 	[ ] Check 'command-to-run' label
 	[ ] Check 'deploy-task' label
+[ ] POST-DEPLOYMENT CHECKS
+	[ ] If inform_stakeholder | Inform stakeholder
+	[ ] If inform_stakeholder | Remove the label
 
 )
 
