@@ -166,49 +166,53 @@ PRBsicCheckChecklist =
 ReleaseSetupChecklist =
 (
 [ ] RELEASE SETUP
-	[ ] Notes | List the people involved
-	[ ] List all tickets that should go in that release
+	[ ] Fill template
+	[ ] Proceed with ISSUE MITIGATION procedure
 	[ ] Ask people involved if there's other PRs that should go in there
-	[ ] List tickets that were previously merged
 	[ ] Determine priority of release
 	[ ] Ensure All tickets are Resolved
-	[ ] Procedure | FIND RELEASE NAME
-	[ ] Stage | Determine if there's a desired stage
-	[ ] Stage | If desired | Check if stage is used
-	[ ] Stage | If desired | newly discovered desired stage, note it in jira
-	[ ] Stage | If desired | If stage is used proceed with SWAP STAGE procedure
-	[ ] Stage | If not desired | Find Available Stage from Jira Release board
-	[ ] Stage | If not desired | Ensure availability in Bamboo
-	[ ] Stage | If not desired | Name Stage
-	[ ] Stage | If not desired | Edit Tabs Outliner Folder to include stage
-	[ ] Stage | If not desired | proceed with AUTODEPLOY RELEASE procedure if necessary
-	[ ] If previously merged | Put label 'faklfjhafdafh'
-	[ ] If previously merged | For each of faklfjhafdafh tickets proceed with TICKET AVOID CONTAMINATION  proceedure
-	[ ] If previously merged | If there is faklfjhafdafh tickets proceed with RELEASE AVOID CONTAMINATION procedure
+	[ ] Proceed with FIND RELEASE NAME procedure
+	[ ] Use the script createRelease
 	[ ] Foreach ticket assign a fixVersion
-	[ ] If previously merged | Foreach faklfjhafdafh ticket create a PR
-	[ ] Stash | Foreach PR change destination
+	[ ] proceed with AUTODEPLOY RELEASE procedure if necessary
+	[ ] Go back to ISSUE MITIGATION procedure
+	[ ] Foreach PR set destination to release branch
 	[ ] Prepare the order of merging. Big tickets first, then small. Reducing conflict resolution volume
 	[ ] Procedure | Foreach ticket MERGE PR
 	[ ] If conflicts | wait until conflicts are resolved before proceeding
 	[ ] Procedure | DEPLOY LOCKED RELEASE TO STAGE
 	[ ] MS Teams | Send a communication to Releases & Deployments according to template
 	[ ] Save the link for communication
-	[ ] Stash | Create PR to master
-	[ ] Procedure | update
+	[ ] Execute PostReleaseCreationValidation
+	[ ] Update template
+	[ ] Update procedure
+[ ] ISSUE MITIGATION
+	[ ] proceed with PREVIOUSLY MERGED CODE CHECK procedure
+	[ ] proceed with STAGE PREFERENCE CHECK procedure
+	[ ] Update Procedure
+[ ] STAGE PREFERENCE CHECK
+	[ ] Check if there's a desired stage
+	[ ] Find Available Stage from Jira Release board
+	[ ] Ensure availability in Bamboo
+	[ ] If the stage is being shotgonned permanently, clearly label it
+	[ ] If stage is used proceed with SWAP STAGE procedure
+	[ ] Update Procedure
+[ ] PREVIOUSLY MERGED CODE CHECK
+	[ ] Check if code was previously merged
+	[ ] Put label 'faklfjhafdafh'
+	[ ] For each of faklfjhafdafh tickets proceed with TICKET AVOID CONTAMINATION  proceedure
+	[ ] If there is faklfjhafdafh tickets proceed with RELEASE AVOID CONTAMINATION procedure
+	[ ] Go back to previous checklist before continuing
+	[ ] Foreach faklfjhafdafh ticket create a PR
+	[ ] Update Procedure
 
 )
 
 FindReleaseNameChecklist =
 (
 [ ] FIND RELEASE NAME
-	[ ] Open templates for procedure
-	[ ] Specify identifier
-	[ ] Specify prefix
-	[ ] Specify suffix
-	[ ] Specify label
-	[ ] generate fixVersion name
-	[ ] Create a fixVersion in Jira with the fixVersion name
+	[ ] Use template to generate fixVersion name
+	[ ] Create a fixVersion in Jira
 	[ ] Add start date to fixVersion
 	[ ] Prioratize fixVersion in the release management board
 	[ ] Create a branch from master with a name identical to the fixVersion name
@@ -434,14 +438,15 @@ DeployLockedReleaseToStageChecklist =
 )
 
 ReleaseSetupTemplate =
-(
+    (
 -------------RELEASE SETUP------------------------------------------
-Title: [Release Name]
-People Involved: [List][People Involved]
-Stage: [Environment Number]
-MS Teams Thread: [MS Teams Link]
-
-)
+Time Stamp:
+Title:
+People Involved:
+Stage:
+MS Teams Thread:
+Tickets:
+    )
 
 FindReleaseNameTemplate =
 (
