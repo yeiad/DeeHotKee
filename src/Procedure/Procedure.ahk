@@ -41,30 +41,14 @@ DeployToProdChecklist =
 (
 
 [ ] DEPLOYMENT TO PRODUCTION
-	[ ] Not Friday
-	[ ] Testers are available for 1h
-	[ ] Testers not on lunch
-	[ ] QA OK to go
-	[ ] BE Devs OK to go
-	[ ] 3rd party OK to go
-	[ ] Open MS Teams Thread
-	[ ] Fill Procedure Template
-	[ ] Check linked tickets (blocks, fixes)
-	[ ] Check 'inform_stakeholder' label
-	[ ] check subtasks
-	[ ] Investigate tickets with no merged code in the release
-	[ ] Ensure all tickets are 'verified'
-	[ ] Compare diff master to release
-	[ ] Compare diff currently deployed branch to release
-	[ ] If Diff | Update branch with master and currently deployed branch
-	[ ] Check Deploy tasks, Command to run etc
-	[ ] If it's a hotfix | Createa a bamboo build
+	[ ] Proceed with PRE-DEPLOYMENT TASKS procedure
+	[ ] Proceed with PRE-DEPLOYMENT RELEASE VALIDATION procedure
+	[ ] Proceed with DEPLOYMENT NOTICES VALIDATION procedure
 	[ ] If Deploy tasks | Run Pre-Deployment Commands to run
-	[ ] Inform team I'm about to deploy
 	[ ] Before every attempt of deployment make sure QA is available
+	[ ] Inform team I'm about to deploy
 	[ ] Attempt a deployment
-	[ ] If json feed is created | set an alarm to check when the deployment gets live
-	[ ] If deployment fails | try again in 10 minutes
+	[ ] Inform the team of any hiccups
 	[ ] Confirm that deployment is live
 	[ ] Communicate with team when deployment is live
 	[ ] Ask QA to check Sign In, Videos Play, Ads work, PreRolls, DMCA, Pagination, Search, Mobile Popunders
@@ -78,8 +62,6 @@ DeployToProdChecklist =
 	[ ] Set release date of fixVersion
 	[ ] remove release from script
 	[ ] Send an email to PM for the deployment
-	[ ] Cross releases off the board
-	[ ] Erease release off the board
 	[ ] Write Deployment Notes For Jira Deployment Ticket on deployment ticket
 	[ ] Check the graph
 	[ ] Get QA's approval
@@ -89,8 +71,22 @@ DeployToProdChecklist =
 	[ ] Run postdeployment deployment script
 	[ ] Run AnalyzePullRequests deployment script
 	[ ] Update templates for this procedure
+	[ ] Cross releases off the board
+	[ ] Erease release off the board
 	[ ] Update this procedure
+)
 
+PreDeploymentTasksChecklist =
+(
+[ ] PRE-DEPLOYMENT TASKS
+	[ ] Not Friday
+	[ ] Testers are available for 1h
+	[ ] Testers not on lunch
+	[ ] QA OK to go
+	[ ] BE Devs OK to go
+	[ ] 3rd party OK to go
+	[ ] Open MS Teams Thread
+	[ ] Fill Procedure Template
 )
 
 CreateABunchOfReleasesChecklist =
@@ -237,7 +233,7 @@ EssentialDeploymentToProdChecklist =
 	[ ] Fill Procedure Template
 	[ ] Proceed with PRE-DEPLOYMENT RELEASE VALIDATION procedure
 	[ ] Proceed with DEPLOYMENT NOTICES VALIDATION procedure
-	[ ] If Deploy tasks | Execute pre-deployment tasks
+	[ ] If Deploy tasks | Execute deployment tasks
 	[ ] Ensure Testers are available before every deployment attempt
 	[ ] Inform team via the Thread that Deployment is about to take place
 	[ ] Inform team via the Thread of any hiccups during deployment
@@ -268,6 +264,14 @@ EssentialDeploymentToProdChecklist =
 	[ ] Run AnalyzePullRequests deployment script
 	[ ] proceed with POST-DEPLOYMENT CHECKS procedure
 	[ ] Update this procedure
+[ ] POST-DEPLOYMENT CHECKS
+	[ ] If inform_stakeholder | Inform stakeholder
+	[ ] If inform_stakeholder | Remove the label
+
+)
+
+PreDeploymentReleaseValidationChecklist =
+(
 [ ] PRE-DEPLOYMENT RELEASE VALIDATION
 	[ ] Ensure absence of bogus commits
 	[ ] Ensure depending on tickets are done
@@ -277,16 +281,17 @@ EssentialDeploymentToProdChecklist =
 	[ ] Ensure QA has done basic validation of release
 	[ ] Ensure release branch is up to date with master
 	[ ] Ensure release branch is up to date with branch currently deployed to production environment
+)
+
+DeploymentNoticesValidationChecklist =
+(
 [ ] DEPLOYMENT NOTICES VALIDATION
 	[ ] Check 'inform_stakeholder' label
 	[ ] Check 'deploy-tasks' label
 	[ ] Check 'command-to-run' label
 	[ ] Check 'deploy-task' label
-[ ] POST-DEPLOYMENT CHECKS
-	[ ] If inform_stakeholder | Inform stakeholder
-	[ ] If inform_stakeholder | Remove the label
-
 )
+
 
 EssentialReleaseCreationChecklist =
 (
@@ -565,7 +570,7 @@ DeployHotfixToProdChecklist  =
 
 ::prdpprch::
     gosub DefineProcedureconstants
-    Clipboard := DeployToProdChecklist
+    Clipboard := DeployToProdChecklist . DeploymentNoticesValidationChecklist . PreDeploymentReleaseValidationChecklist . PreDeploymentTasksChecklist
     SendInput ^v
     return
 
@@ -607,6 +612,6 @@ DeployHotfixToProdChecklist  =
 
 ::prdppresch::
     gosub DefineProcedureconstants
-    Clipboard := EssentialDeploymentToProdChecklist
+    Clipboard := EssentialDeploymentToProdChecklist . DeploymentNoticesValidationChecklist . PreDeploymentReleaseValidationChecklist . PreDeploymentTasksChecklist
     SendInput ^v
     return
