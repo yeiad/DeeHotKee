@@ -500,6 +500,15 @@ DEPLOYMENT TICKET:
 MS TEAMS CONVERSATION:
     [TEAMS.MICROSOFT.COM URL]
 
+Core checklist:
+	[ ] Sign In
+	[ ] Videos Play
+	[ ] Ads work
+	[ ] PreRolls
+	[ ] DMCA
+	[ ] Pagination
+	[ ] Search
+	[ ] Mobile Popunders
 )
 
 DeployHotfixToProdTemplate =
