@@ -82,16 +82,17 @@ PostDeploymentChecklist =
 	[ ] Merge Release In Master
 	[ ] Run update release branches script
 	[ ] force FixVersion in postdeployment script
-	[ ] Run postdeployment deployment script
-	[ ] Run AnalyzePullRequests deployment script
 	[ ] Run deploy command
-	[ ] Update templates for this procedure
-	[ ] Run command 'deploy'
     [ ] Change status of fixVersion
     [ ] Set release date of fixVersion
-    [ ] Setup monocle stage-reservation for stage
+	[ ] Run postdeployment deployment script
+	[ ] Run AnalyzePullRequests deployment script
+	[ ] Setup monocle stage-reservation for stage
 	[ ] Cross releases off the board
 	[ ] Erease release off the board
+	[ ] Send email to PM
+	[ ] Update templates for this procedure
+	[ ] Update this procedure
 )
 
 PreDeploymentTasksChecklist =
@@ -155,28 +156,12 @@ PRBsicCheckChecklist =
 (
 
 [ ] PR BASIC CHECK
-	[ ] Check Authors of commits
-	[ ] Check if there are approvers for those authors
-	[ ] Note PR as lacking appropriate approvers
-	[ ] Add missing approvers
-	[ ] If missing approvers, set jira status to 'under review'
-	[ ] If missing approvers, leave comment '[AUTO COMMENT] Missing approvers for some of the code'
-	[ ] If there are missing approvers stop procedure
-	[ ] Check if approvals are resolving
-	[ ] If approvals aren't resolving stop procedure
-	[ ] Open Jira ticket
-	[ ] Check fixVersion
-	[ ] Check if fixVersion is unreleased
-	[ ] Validate that the unreleased fixversion matches destination branch
-	[ ] Change PR destination branch if fixVersion doesn't match
-	[ ] Stop procedure if PR destination doesn't match
-	[ ] Check 'fixes' links
-	[ ] Check 'FS-depended by' links
-	[ ] Ensure status is 'resolved'
-	[ ] Ensure ticket linked are 'resolved' if they are fixed by this ticket
+	[ ] Execute PreReleaseTicketBasicChecks command
+	[ ] Check commit messages
+	[ ] Check parent tasks
+	[ ] Check sibling tasks
 	[ ] Put a label 'resolved_basic_check_done'
 	[ ] Update this procedure
-
 )
 
 
@@ -232,15 +217,16 @@ FindReleaseNameChecklist =
 
 [ ] FIND RELEASE NAME
 	[ ] Use template to generate fixVersion name
-	[ ] Create a fixVersion in Jira
+	[ ] Set parameters for createRelease command
+	[ ] Execute createRelease command
+	[ ] Execute postReleaseCreation command
+	[ ] Execute PostDeploymentConflictManagement command
 	[ ] Add start date to fixVersion
 	[ ] Prioratize fixVersion in the release management board
-	[ ] Create a branch from master with a name identical to the fixVersion name
 	[ ] Add the fixVersion name to the "update branches script"
 	[ ] Add release label to whiteboard's calendar
 	[ ] Add release label to whiteboard's list of releases
 	[ ] Update Procedure
-
 )
 
 EssentialDeploymentToProdChecklist =
@@ -406,21 +392,13 @@ MergePRChecklist =
 (
 
 [ ] MERGE PR
-	[ ] Jira | check if it's a Hotfix
-	[ ] Jira | check Linked tickets
-	[ ] Jira | Check Subtasks
-	[ ] Stash | Refresh Stash page
-	[ ] Stash | Check destination branch
-	[ ] Stash | Check commit messages
-	[ ] Stash | Check code if it's FE/BE
-	[ ] Stash | Check approvers
-	[ ] Stash | Change Destination Branch
-	[ ] Stash | if conflict | Procedure | CONFLICT PR
-	[ ] Stash | Merge PR
-	[ ] Jira | Set fixVersion
-	[ ] Procedure | CONFLICT MANAGEMENT
-	[ ] Procedure | Update this
-
+	[ ] Check if it's a Hotfix
+	[ ] proceed with PR BASIC CHECK
+	[ ] Execute createRelease command
+	[ ] proceed with CONFLICT PR procedure if necessary
+	[ ] Merge PR
+	[ ] Proceed with CONFLICT MANAGEMENT procedure
+	[ ] Update this procedure
 )
 
 ConflictPRChecklist =
@@ -475,24 +453,22 @@ DeployLockedReleaseChecklist =
 DeployHotfixToProdChecklist  =
 (
 
-[ ] DEPLOY HOTFIX TICKET STRAIGHT TO PROD
+[ ] DEPLOY HOTFIX TICKET
     [ ] Should someone approve the hotfix?
-    [ ] What are the differences in procedure between hotfix and regular procedure?
-	[ ] Get a list of tickets that will go in hotfix
+    [ ] Get a list of tickets that will go in hotfix
 	[ ] Validate presence of hotfix label
 	[ ] Validate presence of hotfix effort type
 	[ ] Proceed with PR BASIC CHECK on all tickets
 	[ ] proceed with FIND RELEASE NAME
-	[ ] create a branch from master
-	[ ] Create a release ticket
-	[ ] Create a fixVersion that starts with hotfix/
-	[ ] Set the fixVersion on the tickets
 	[ ] Setup branch in bamboo for hotfix branch
-	[ ] Change PR destinations of tickets
 	[ ] Proceed with MERGE PR procedure
-	[ ] Proceed with DEPLOYMENT TO PRODUCTION procedure
+	[ ] Proceed with DEPLOY LOCKED RELEASE procedure to stage
+	[ ] proceed with POST-DEPLOYMENT procedure for stage
+	[ ] Get QA verification
+	[ ] Proceed with DEPLOY LOCKED RELEASE procedure to prod
+	[ ] Check the graphs
+	[ ] Proceed with POST-DEPLOYMENT procedure for prod
 	[ ] Update the procedure
-
 )
 
 ReleaseSetupTemplate =
@@ -626,7 +602,7 @@ TESTING PARTY:
     Clipboard := ReleaseSetupTemplate . FindReleaseNameTemplate
     SendInput ^v
     return
-
+# //TODO add pr basic check to prdphfprch
 ::prdphfprch::
     gosub DefineProcedureconstants
     Clipboard := DeployHotfixToProdChecklist . FindReleaseNameChecklist . MergePRChecklist
