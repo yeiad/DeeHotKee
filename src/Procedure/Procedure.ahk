@@ -2,24 +2,25 @@ DefineProcedureconstants:
     DailyProcedureChecklist =
     (
 [ ] DAILY PROCEDURE
+		***********************SCRUM PREP**********************************
     [ ] Look at calendar for appointments for the day and the week*********
-    [ ] Read what was done yesterday***************************************
+    [ ] Make sure my 'in progress' tickets are actually in progress********
+    [ ] Read communication on teams****************************************
+    [ ] Read unread emails*************************************************
+		**********************IRREGULAR TASKS******************************
+	[ ] Weekday PROCEDURE**************************************************
+		**********************DAILY TASKS**********************************
+    [ ] Log missing work in jira*******************************************
     [ ] Carryover backlog of uncompleted tasks to today********************
     [ ] Update the backlog of tasks****************************************
-    [ ] Read unread emails*************************************************
 	[ ] Read useless emails************************************************
     [ ] Follow up emails***************************************************
-    [ ] Skim through All mail**********************************************
-	[ ] Go through DayForce messages***************************************
-    [ ] Log missing work in jira*******************************************
-	[ ] Save records from daily notes**************************************
-	[ ] Save records from daily timelogs***********************************
+    [ ] Save records from daily timelogs***********************************
 	[ ] Save records from daily mistakes***********************************
 	[ ] Save records from daily filled templates***************************
 	[ ] Save records from daily filled procedures**************************
     [ ] Save records from daily script results*****************************
-    [ ] Make sure my 'in progress' tickets are actually in progress********
-    [ ] Read communication on teams
+	[ ] Save records from daily notes**************************************
         ******************Daily Deployment Tasks***************************
     [ ] Update all unreleased releases with master*************************
     [ ] Execute Deployment scrpts******************************************
@@ -29,12 +30,23 @@ DefineProcedureconstants:
     [ ] Note status of all releasables*************************************
     [ ] Communicate status of releases to team*****************************
     [ ] Add tasks for releases that need action****************************
-    - -----------------------------------------------------
-    [ ] Review PRs on which I am a reviewer********************************
+        ******************BUILD MASTER*************************************
+	[ ] Deploy ready hotfixes**********************************************
+	[ ] Deploy ready releases**********************************************
+	[ ] Stage ready releasables********************************************
+	[ ] Create release for groomed tickets*********************************
+		******************PR***********************************************
     [ ] Follow up on my PRs************************************************
-    - -----------------------------------------------------
-    [ ] Weekday PROCEDURE**************************************************
+	[ ] Review PRs on which I am a reviewer********************************
+	    ******************UNFINISHED TASKS*********************************
+	[ ] proceed with noted tasks*******************************************
+	[ ] read emails before leaving*****************************************
+	[ ] plan the next day**************************************************
+        ******************DEV**********************************************
+	[ ] Proceed with sprint ticket*****************************************
+		******************UNFINISHED TASKS*********************************
     [ ] Update procedure***************************************************
+		*******************************************************************
 
 )
 DeployToProdChecklist =
