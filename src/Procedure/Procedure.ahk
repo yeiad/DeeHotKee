@@ -1,54 +1,42 @@
 DefineProcedureconstants:
     DailyProcedureChecklist =
     (
+
 [ ] DAILY PROCEDURE
-		***********************SCRUM PREP**********************************
-    [ ] Look at calendar for appointments for the day and the week*********
-    [ ] Make sure my 'in progress' tickets are actually in progress********
-    [ ] Read communication on teams****************************************
-    [ ] Read unread emails*************************************************
-		**********************IRREGULAR TASKS******************************
-	[ ] Weekday PROCEDURE**************************************************
-		**********************DAILY TASKS**********************************
-    [ ] Log missing work in jira*******************************************
-    [ ] Carryover backlog of uncompleted tasks to today********************
+    [ ] Calendar***********************************************************
+    [ ] Tickets status*****************************************************
+    [ ] MS Teams***********************************************************
+    [ ] Unread emails******************************************************
+	[ ] Weekday************************************************************
+	[ ] Log time***********************************************************
+    [ ] Copy unchecked tasks from checklist********************************
+    [ ] Save daily script results******************************************
+	[ ] Save daily filled procedures***************************************
+	[ ] Save daily filled templates****************************************
+	[ ] Save daily mistakes************************************************
+    [ ] Save daily timelogs************************************************
+	[ ] Save daily notes***************************************************
+    [ ] Hotfix*************************************************************
+    [ ] Update branches****************************************************
+    [ ] Analayze PullRequests**********************************************
+    [ ] Analyze Releases***************************************************
+		******************END OF DAY***************************************
+	[ ] Unread emails******************************************************
+	[ ] plan the next day**************************************************
+	[ ] Update procedure***************************************************
+        ******************SCRIPTED*****************************************
+    [ ] Proceed with sprint ticket*****************************************
     [ ] Update the backlog of tasks****************************************
-	[ ] Read useless emails************************************************
-    [ ] Follow up emails***************************************************
-    [ ] Save records from daily timelogs***********************************
-	[ ] Save records from daily mistakes***********************************
-	[ ] Save records from daily filled templates***************************
-	[ ] Save records from daily filled procedures**************************
-    [ ] Save records from daily script results*****************************
-	[ ] Save records from daily notes**************************************
-        ******************Daily Deployment Tasks***************************
-    [ ] Update all unreleased releases with master*************************
-    [ ] Execute Deployment scrpts******************************************
-    [ ] Open and process Hotfix Jira Filter********************************
-    [ ] Follow up on Hotfix Releases***************************************
-    [ ] Review 19.Hotfix Release*******************************************
-    [ ] Note status of all releasables*************************************
-    [ ] Communicate status of releases to team*****************************
-    [ ] Add tasks for releases that need action****************************
-        ******************BUILD MASTER*************************************
-	[ ] Deploy ready hotfixes**********************************************
-	[ ] Deploy ready releases**********************************************
-	[ ] Stage ready releasables********************************************
-	[ ] Create release for groomed tickets*********************************
-		******************PR***********************************************
+    [ ] Create release for groomed tickets*********************************
     [ ] Follow up on my PRs************************************************
 	[ ] Review PRs on which I am a reviewer********************************
-	    ******************UNFINISHED TASKS*********************************
-	[ ] proceed with noted tasks*******************************************
-	[ ] read emails before leaving*****************************************
-	[ ] plan the next day**************************************************
-        ******************DEV**********************************************
-	[ ] Proceed with sprint ticket*****************************************
-		******************UNFINISHED TASKS*********************************
-    [ ] Update procedure***************************************************
+	[ ] Proceed with noted tasks*******************************************
+	[ ] Follow up emails***************************************************
+	[ ] Read useless emails************************************************
+	[ ] Update procedure***************************************************
 		*******************************************************************
-
 )
+
 DeployToProdChecklist =
 (
 
@@ -61,18 +49,14 @@ DeployToProdChecklist =
 	[ ] Before every attempt of deployment inform team
 	[ ] At every hiccup, inform the team
 	[ ] Communicate with team when deployment is live
-	[ ] Ask QA to check core checklist
 	[ ] proceed with DEPLOY LOCKED RELEASE procedure
+	[ ] Ask QA to check core checklist
 	[ ] Check the graphs
 	[ ] Verify Code Diff Quickly and proceed with BAD CODE ON PROD procedure if necessary
-	[ ] remove release from script
-	[ ] Send an email to PM for the deployment
 	[ ] put notes in the release ticket
-	[ ] Check the graph
 	[ ] Get QA's approval of the core checklist
 	[ ] if OK proceed with POST-DEPLOYMENT procedure
 	[ ] Update this procedure
-
 )
 
 PostDeploymentChecklist =
@@ -80,13 +64,15 @@ PostDeploymentChecklist =
 
 [ ] POST-DEPLOYMENT
 	[ ] Merge Release In Master
+	[ ] remove release from script
 	[ ] Run update release branches script
-	[ ] force FixVersion in postdeployment script
-	[ ] Run deploy command
     [ ] Change status of fixVersion
     [ ] Set release date of fixVersion
+	[ ] force FixVersion in postdeployment script
+	[ ] Run deploy command
 	[ ] Run postdeployment deployment script
 	[ ] Run AnalyzePullRequests deployment script
+	[ ] Check the graph
 	[ ] Setup monocle stage-reservation for stage
 	[ ] Cross releases off the board
 	[ ] Erease release off the board
@@ -441,7 +427,6 @@ ConflictManagementChecklist =
 DeployLockedReleaseChecklist =
 (
 [ ] DEPLOY LOCKED RELEASE
-	[ ] Check Deploy tasks, Command to run etc
 	[ ] pre-deploy Command to run
 	[ ] Deploy
 	[ ] Confirm that deployment is live
@@ -581,7 +566,7 @@ TESTING PARTY:
 
 ::prdpprch::
     gosub DefineProcedureconstants
-    Clipboard := (DeployToProdChecklist . PreDeploymentTasksChecklist . PreDeploymentReleaseValidationChecklist . DeploymentNoticesValidationChecklist . PostDeploymentChecklist )
+    Clipboard := DeployToProdChecklist . PreDeploymentTasksChecklist . PreDeploymentReleaseValidationChecklist . DeploymentNoticesValidationChecklist . DeployLockedReleaseChecklist . PostDeploymentChecklist
     SendInput ^v
     return
 
@@ -602,7 +587,7 @@ TESTING PARTY:
     Clipboard := ReleaseSetupTemplate . FindReleaseNameTemplate
     SendInput ^v
     return
-# //TODO add pr basic check to prdphfprch
+
 ::prdphfprch::
     gosub DefineProcedureconstants
     Clipboard := DeployHotfixToProdChecklist . FindReleaseNameChecklist . MergePRChecklist
