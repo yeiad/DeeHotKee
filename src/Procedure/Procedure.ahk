@@ -21,20 +21,25 @@ DefineProcedureconstants:
     [ ] Analayze PullRequests**********************************************
     [ ] Analyze Releases***************************************************
 		******************END OF DAY***************************************
-	[ ] Unread emails******************************************************
+	[ ] Unread communication***********************************************
 	[ ] plan the next day**************************************************
 	[ ] Update procedure***************************************************
-        ******************SCRIPTED*****************************************
+	[ ] Log time***********************************************************
+        *****************INTERRUPTIONS/OVERRULING**************************
+	[ ] Release******DD****************************************************
+	[ ] Hotfix*************************************************************
+	[ ] Meeting************************************************************
+		******************SCRIPTED*****************************************
     [ ] Proceed with sprint ticket*****************************************
     [ ] Update the backlog of tasks****************************************
     [ ] Create release for groomed tickets*********************************
     [ ] Follow up on my PRs************************************************
 	[ ] Review PRs on which I am a reviewer********************************
 	[ ] Proceed with noted tasks*******************************************
+	[ ] Automation*********************************************************
 	[ ] Follow up emails***************************************************
 	[ ] Read useless emails************************************************
-	[ ] Update procedure***************************************************
-		*******************************************************************
+	[ ] Sometimes List*****************************************************
 )
 
 DeployToProdChecklist =
@@ -50,12 +55,8 @@ DeployToProdChecklist =
 	[ ] At every hiccup, inform the team
 	[ ] Communicate with team when deployment is live
 	[ ] proceed with DEPLOY LOCKED RELEASE procedure
-	[ ] Ask QA to check core checklist
-	[ ] Check the graphs
-	[ ] Verify Code Diff Quickly and proceed with BAD CODE ON PROD procedure if necessary
-	[ ] put notes in the release ticket
-	[ ] Get QA's approval of the core checklist
-	[ ] if OK proceed with POST-DEPLOYMENT procedure
+	[ ] Proceed with POST-DEPLOYMENT procedure
+	[ ] if QA approve core checklist proceed with DEPLOYMENT FINALIZATION procedure *
 	[ ] Update this procedure
 )
 
@@ -63,13 +64,20 @@ PostDeploymentChecklist =
 (
 
 [ ] POST-DEPLOYMENT
+	[ ] Run deploy command
+    [ ] Change status of fixVersion
+    [ ] Set release date of fixVersion
+	[ ] Ask QA to check core checklist
+	[ ] Verify Code Diff Quickly and proceed with BAD CODE ON PROD procedure if necessary
+	[ ] put notes in the release ticket
+	[ ] Check the graphs
+	[ ] Get QA's approval of the core checklist
+	[ ] Update this procedure
+[ ] DEPLOYMENT FINALIZATION
 	[ ] Merge Release In Master
 	[ ] remove release from script
 	[ ] Run update release branches script
-    [ ] Change status of fixVersion
-    [ ] Set release date of fixVersion
 	[ ] force FixVersion in postdeployment script
-	[ ] Run deploy command
 	[ ] Run postdeployment deployment script
 	[ ] Run AnalyzePullRequests deployment script
 	[ ] Check the graph
@@ -171,6 +179,7 @@ ReleaseSetupChecklist =
 	[ ] If conflicts | wait until conflicts are resolved before proceeding
 	[ ] proceed with DEPLOY LOCKED RELEASE procedure
 	[ ] proceed with POST-DEPLOYMENT procedure
+	[ ] if QA approve core checklist proceed with DEPLOYMENT FINALIZATION procedure *
 	[ ] MS Teams | Send a communication to Releases & Deployments according to template
 	[ ] Save the link for communication
 	[ ] Execute PostReleaseCreationValidation
@@ -366,7 +375,7 @@ EssentialReleaseCreationChecklist =
 AutodeployReleaseChecklist =
 (
 
-[ ] AUTODEPLOY RELEASE -------------------------------------------------------
+[ ] AUTODEPLOY RELEASE
 	[ ] Jira | Enter Stage in fixversion description
 	[ ] Bamboo | Setup a branch
 	[ ] Bamboo | Set a trigger for the stage environment on the build of the branch
@@ -398,7 +407,6 @@ ConflictPRChecklist =
 	[ ] Send message in Jira ticket
 	[ ] Send message on Stash
 	[ ] Update this procedure
-
 )
 
 ConflictManagementChecklist =
@@ -421,18 +429,17 @@ ConflictManagementChecklist =
 	[ ] If Major | Note tickets created
 	[ ] Template | Update
 	[ ] Procedure | Update
-
 )
 
 DeployLockedReleaseChecklist =
 (
+
 [ ] DEPLOY LOCKED RELEASE
 	[ ] pre-deploy Command to run
 	[ ] Deploy
 	[ ] Confirm that deployment is live
 	[ ] post-deploy Command to run
 	[ ] Update this procedure
-
 )
 
 DeployHotfixToProdChecklist  =
@@ -448,11 +455,13 @@ DeployHotfixToProdChecklist  =
 	[ ] Setup branch in bamboo for hotfix branch
 	[ ] Proceed with MERGE PR procedure
 	[ ] Proceed with DEPLOY LOCKED RELEASE procedure to stage
-	[ ] proceed with POST-DEPLOYMENT procedure for stage
+	[ ] proceed with POST-DEPLOYMENT procedure
+	[ ] if QA approve core checklist proceed with DEPLOYMENT FINALIZATION procedure * for stage
 	[ ] Get QA verification
 	[ ] Proceed with DEPLOY LOCKED RELEASE procedure to prod
 	[ ] Check the graphs
-	[ ] Proceed with POST-DEPLOYMENT procedure for prod
+	[ ] Proceed with POST-DEPLOYMENT procedure
+	[ ] if QA approve core checklist proceed with DEPLOYMENT FINALIZATION procedure * for prod
 	[ ] Update the procedure
 )
 

@@ -13,14 +13,9 @@
     insertTicketAndShortDescription(DeploymentTicket)
     return
 
-::tlpr::    ; Time Log Pull Request
+::tlsm::    ; Server Maintenance Ticket
     fix()
-    insertTicketAndShortDescription(PullRequestTicket)
-    return
-
-::tlsp::    ; Time Log Sprint Planning
-    fix()
-    insertTicketAndShortDescription(SprintPlanningTicket)
+    insertTicketAndShortDescription(ServerMaintenanceTicket)
     return
 
 ::tlsr::    ; Time Log Sprint Refining
