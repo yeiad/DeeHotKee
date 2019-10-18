@@ -447,27 +447,42 @@ DeployLockedReleaseChecklist =
 
 DeployHotfixToProdChecklist  =
 (
-[ ] HOTFIX LEVEL B
-	[ ] Explain the bug to a QA
-	[ ] Reproduce the bug with QA
-	[ ] Create an empty ticket
-	[ ] Ask QA to fill in the details
-	[ ] Communicate to team about the bug
-	[ ] Inform People
-	[ ] Branch off master with ticket number
-	[ ] commit fix with ticket number
-	[ ] Create build in Bamboo
-	[ ] Deploy with bamboo
-	[ ] Test hotfix on prod
-	[ ] Create hf fixversion and release
-	[ ] Validate hotfix flags in ticket
-	[ ] set tickets to deployed
-	[ ] Merge into master
-	[ ] Update all release branches
-	[ ] Fill in the template
-	[ ] put notes in ticket
-	[ ] Send email to PM
-	[ ] Update this procedure
+[ ] HOTFIX LEVEL A
+ 	[ ] DEBUG AND FIX ON PRODUCTION ENVIRONMENT
+ 	[ ] BYPASS BAMBOO USE SFTP TO PUSH CODE
+ 	[ ] STABALIZE SYSTEM
+ 	[ ] PROCEED WITH LEVEL C
+
+ [ ] HOTFIX LEVEL B
+ 	[ ] DELEGATE COMMUNICATION & TICKET MANAGEMENT
+ 	[ ] DEBUG AND FIX ON PRODUCTION ENVIRONMENT
+ 	[ ] BYPASS BAMBOO USE SFTP TO PUSH CODE
+ 	[ ] STABALIZE SYSTEMS DOWN
+ 	[ ] PROCEED WITH LEVEL C PROCEDURE
+
+ [ ] HOTFIX LEVEL C
+ 	[ ] Explain the bug to a QA
+ 	[ ] Reproduce the bug with QA
+ 	[ ] Create an empty ticket
+ 	[ ] Ask QA to fill in the details
+ 	[ ] Communicate to team about the bug
+ 	[ ] Branch off master with ticket number
+ 	[ ] commit fix with ticket number
+ 	[ ] Create build in Bamboo
+ 	[ ] Bugfix on stage if necessary
+ 	[ ] Deploy with bamboo
+ 	[ ] Communicate to team about deployment
+ 	[ ] Test hotfix on prod
+ 	[ ] Create hf fixversion and release
+ 	[ ] Validate hotfix flags in ticket
+ 	[ ] set tickets to deployed
+ 	[ ] Merge into master without peer reviewing
+ 	[ ] Update all release branches
+ 	[ ] Fill in the template
+ 	[ ] put notes in ticket
+ 	[ ] Send email to PM
+ 	[ ] Update this procedure
+ 	[ ] Update the template
 
 [ ] DEPLOY HOTFIX TICKET
     [ ] Should someone approve the hotfix?
@@ -591,16 +606,32 @@ Things to address:
 
 DeployHotfixToProdTemplate =
 (
-----DEPLOY HOTFIX TICKET STRAIGHT TO PROD----
 
+------HOTFIX LEVEL A PRE REQUESITS---------------------
+	[ ] Site is down for all users no feature is accessible
+	[ ] Informing team is not required
 ------HOTFIX LEVEL B PRE REQUESITS---------------------
-	[ ] Hotfix is affecting one of the pillers of tube's site
+	[ ] Videos are not playable for most users
+	[ ] Team should be informed ASAP
+------HOTFIX LEVEL C PRE REQUESITS---------------------
+	[ ] Team must be informed before proceeding
+	[ ] One of the pillers of tube's site is down
+		[ ] ads
+		[ ] search
+		[ ] sign in
+		[ ] upload
+		[ ] video plays
 
 PARTIES:
+	REPORTERS:
+		[PARTY]
     INFORMED:
         [INFORMED PARTY]
     TESTING:
-        [TESTING PARTY]
+        [PARTY]
+	DEVELOPERS:
+		[PARTY]
+
 LIST OF TICKETS:
 	[LIST][TICKETS]
 
