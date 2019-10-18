@@ -281,6 +281,8 @@ PreDeploymentReleaseValidationChecklist =
 
 [ ] PRE-DEPLOYMENT RELEASE VALIDATION
     [ ] Ensure all tickets are verified
+    [ ] issueFunction in subtasksOf("fixVersion = 'release/19.09.3-sa-xx-p2' and labels not in ('DDR')") AND Status not in (closed, verified) ORDER BY status DESC
+    [ ] 'non-blocker' labels: the fixVersion will be removed, the sub-task is transformed into a task, the task is linked as 'caused by' to the release, the 'stage' text is removed from summary and description, it becomes an 'isprod' issue.
     [ ] Ensure release branch is up to date with master
     [ ] Ensure release branch is up to date with branch currently deployed to production environment
     [ ] Ensure depending tickets are done
@@ -445,6 +447,27 @@ DeployLockedReleaseChecklist =
 
 DeployHotfixToProdChecklist  =
 (
+[ ] HOTFIX LEVEL B
+	[ ] Explain the bug to a QA
+	[ ] Reproduce the bug with QA
+	[ ] Create an empty ticket
+	[ ] Ask QA to fill in the details
+	[ ] Communicate to team about the bug
+	[ ] Inform People
+	[ ] Branch off master with ticket number
+	[ ] commit fix with ticket number
+	[ ] Create build in Bamboo
+	[ ] Deploy with bamboo
+	[ ] Test hotfix on prod
+	[ ] Create hf fixversion and release
+	[ ] Validate hotfix flags in ticket
+	[ ] set tickets to deployed
+	[ ] Merge into master
+	[ ] Update all release branches
+	[ ] Fill in the template
+	[ ] put notes in ticket
+	[ ] Send email to PM
+	[ ] Update this procedure
 
 [ ] DEPLOY HOTFIX TICKET
     [ ] Should someone approve the hotfix?
@@ -512,26 +535,28 @@ Sprint:				Current Sprint
 DeployToProdTemplate =
 (
 
+
 -------------DEPLOY TO PROD----------------------------
 TIMESTAMP:
     [TIMESTAMP]
 
 RELEASE INFORMATION:
-    [RELEASE NAME]|[RELEASE JIRA URL]
+    [NAME | LINK]
+
+EPIC LINKS:
+	[NAME | LINK]
+RELEASE TICKET:
+	[LINK]
 
 TESTING PARTY:
 	REPORTERS:
-	    [LIST OF PEOPLE]
+
 	DEVS:
-	    [LIST OF PEOPLE]
+
 	TESTERS:
-	    [LIST OF PEOPLE]
 
-DEPLOYMENT TICKET:
-	[JIRA TICKET FOR DEPLOYMENT]
 
-MS TEAMS CONVERSATION:
-    [TEAMS.MICROSOFT.COM URL]
+MS TEAMS CONVERSATIONS:
 
 Core checklist:
 	[ ] Sign In
@@ -542,28 +567,50 @@ Core checklist:
 	[ ] Pagination
 	[ ] Search
 	[ ] Mobile Popunders
+	[ ] VPN test Mobile & PC
+
+JQL TEMPLATES:
+	Blocked by
+	FF-depends on
+	FS-depends on
+	is fixed by
+	SF-depends on
+	SS-depends on
+
+
+	issueFunction in linkedIssuesOf("fixVersion = [FV ID] and labels not in ('DDR')","Blocked by") AND Status not in (closed,verified)
+	issueFunction in linkedIssuesOf("fixVersion = [FV ID] and labels not in ('DDR')","FF-depends on") AND Status not in (closed,verified)
+	issueFunction in linkedIssuesOf("fixVersion = [FV ID] and labels not in ('DDR')","FS-depends on") AND Status not in (closed,verified)
+	issueFunction in linkedIssuesOf("fixVersion = [FV ID] and labels not in ('DDR')","is fixed by") AND Status not in (closed,verified)
+	issueFunction in linkedIssuesOf("fixVersion = [FV ID] and labels not in ('DDR')","SF-depends on") AND Status not in (closed,verified)
+	issueFunction in linkedIssuesOf("fixVersion = [FV ID] and labels not in ('DDR')","SS-depends on") AND Status not in (closed,verified)
+	issueFunction in subtasksOf("fixVersion = [FV ID] and labels not in ('DDR') AND STATUS NOT IN (CLOSED)") and status not in (closed,verified)
+
+Things to address:
 )
 
 DeployHotfixToProdTemplate =
 (
 ----DEPLOY HOTFIX TICKET STRAIGHT TO PROD----
+
+------HOTFIX LEVEL B PRE REQUESITS---------------------
+	[ ] Hotfix is affecting one of the pillers of tube's site
+
+PARTIES:
+    INFORMED:
+        [INFORMED PARTY]
+    TESTING:
+        [TESTING PARTY]
 LIST OF TICKETS:
 	[LIST][TICKETS]
 
 HOTFIX FIXVERSION NAME:
-	[FIXVERSION NAME]
-
-RELEASEURL:
-	[RELEASE URL]
+	[FIXVERSION NAME | URL]
 
 RELEASE TICKET
-	[RELEASE TICKET URL]
-
-PEOPLE INVOLVED:
-	[LIST][PEOPLE INVOLVED]
-
-TESTING PARTY:
-	[TESTING PARTY]
+	[URL]
+MS TEAMS:
+    [URL]
 )
 
     return
@@ -600,7 +647,7 @@ TESTING PARTY:
 
 ::prdphfprch::
     gosub DefineProcedureconstants
-    Clipboard := DeployHotfixToProdChecklist . FindReleaseNameChecklist . MergePRChecklist
+    Clipboard := DeployHotfixToProdChecklist . FindReleaseNameChecklist . MergePRChecklist . DeployHotfixToProdTemplate
     SendInput ^v
     return
 
