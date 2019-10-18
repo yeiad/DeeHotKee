@@ -466,6 +466,7 @@ DeployHotfixToProdChecklist  =
  	[ ] Create an empty ticket
  	[ ] Ask QA to fill in the details
  	[ ] Communicate to team about the bug
+ 	[ ] Communicate to 3rd parties affected
  	[ ] Branch off master with ticket number
  	[ ] commit fix with ticket number
  	[ ] Create build in Bamboo
