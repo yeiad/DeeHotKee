@@ -49,7 +49,6 @@ DeployToProdChecklist =
 [ ] DEPLOYMENT TO PRODUCTION
 	[ ] Proceed with PRE-DEPLOYMENT TASKS procedure
 	[ ] Proceed with PRE-DEPLOYMENT RELEASE VALIDATION procedure
-	[ ] Proceed with DEPLOYMENT NOTICES VALIDATION procedure
 	[ ] Every time the graph is checked, communicate with the team
 	[ ] Before every attempt of deployment make sure QA is available
 	[ ] Before every attempt of deployment inform team
@@ -57,8 +56,9 @@ DeployToProdChecklist =
 	[ ] Communicate with team when deployment is live
 	[ ] proceed with DEPLOY LOCKED RELEASE procedure
 	[ ] Proceed with POST-DEPLOYMENT procedure
-	[ ] if QA approve core checklist proceed with DEPLOYMENT FINALIZATION procedure *
+	[ ] proceed with DEPLOYMENT FINALIZATION procedure
 	[ ] Update this procedure
+	[ ] Update this template
 )
 
 PostDeploymentChecklist =
@@ -67,15 +67,16 @@ PostDeploymentChecklist =
 [ ] POST-DEPLOYMENT
 	[ ] Run deploy command
     [ ] Change status of fixVersion
-    [ ] Set release date of fixVersion
+	[ ] Set release date of fixVersion
 	[ ] Ask QA to check core checklist
 	[ ] Verify Code Diff Quickly and proceed with BAD CODE ON PROD procedure if necessary
-	[ ] put notes in the release ticket
 	[ ] Check the graphs
-	[ ] Get QA's approval of the core checklist
 	[ ] Update this procedure
+
 [ ] DEPLOYMENT FINALIZATION
-	[ ] Merge Release In Master
+	[ ] Wait for QA's approval of the core checklist
+	[ ] Merge Rebase Release In Master *
+	[ ] Delete all branches of old tickets
 	[ ] remove release from script
 	[ ] Run update release branches script
 	[ ] force FixVersion in postdeployment script
@@ -83,9 +84,8 @@ PostDeploymentChecklist =
 	[ ] Run AnalyzePullRequests deployment script
 	[ ] Check the graph
 	[ ] Setup monocle stage-reservation for stage
-	[ ] Cross releases off the board
-	[ ] Erease release off the board
 	[ ] Send email to PM
+	[ ] put notes and template in release ticket*
 	[ ] Update templates for this procedure
 	[ ] Update this procedure
 )
@@ -198,7 +198,8 @@ ReleaseSetupChecklist =
 	[ ] If stage is used proceed with SWAP STAGE procedure
 	[ ] Update Procedure
 [ ] PREVIOUSLY MERGED CODE CHECK
-	[ ] Check if code was previously merged
+    [ ] Check if commits exist on multiple branches
+    [ ] Check if commits from other tickets are in the branch
 	[ ] Put label 'faklfjhafdafh'
 	[ ] For each of faklfjhafdafh tickets proceed with TICKET AVOID CONTAMINATION  proceedure
 	[ ] If there is faklfjhafdafh tickets proceed with RELEASE AVOID CONTAMINATION procedure
@@ -281,8 +282,8 @@ PreDeploymentReleaseValidationChecklist =
 
 [ ] PRE-DEPLOYMENT RELEASE VALIDATION
     [ ] Ensure all tickets are verified
-    [ ] issueFunction in subtasksOf("fixVersion = 'release/19.09.3-sa-xx-p2' and labels not in ('DDR')") AND Status not in (closed, verified) ORDER BY status DESC
-    [ ] 'non-blocker' labels: the fixVersion will be removed, the sub-task is transformed into a task, the task is linked as 'caused by' to the release, the 'stage' text is removed from summary and description, it becomes an 'isprod' issue.
+    [ ] Replace fixVersion in JQL in template and run it
+    [ ] proceed with NON BLOCKER procedure if necessary
     [ ] Ensure release branch is up to date with master
     [ ] Ensure release branch is up to date with branch currently deployed to production environment
     [ ] Ensure depending tickets are done
@@ -561,6 +562,7 @@ RELEASE INFORMATION:
 
 EPIC LINKS:
 	[NAME | LINK]
+
 RELEASE TICKET:
 	[LINK]
 
@@ -593,14 +595,14 @@ JQL TEMPLATES:
 	SF-depends on
 	SS-depends on
 
-
-	issueFunction in linkedIssuesOf("fixVersion = [FV ID] and labels not in ('DDR')","Blocked by") AND Status not in (closed,verified)
-	issueFunction in linkedIssuesOf("fixVersion = [FV ID] and labels not in ('DDR')","FF-depends on") AND Status not in (closed,verified)
-	issueFunction in linkedIssuesOf("fixVersion = [FV ID] and labels not in ('DDR')","FS-depends on") AND Status not in (closed,verified)
-	issueFunction in linkedIssuesOf("fixVersion = [FV ID] and labels not in ('DDR')","is fixed by") AND Status not in (closed,verified)
-	issueFunction in linkedIssuesOf("fixVersion = [FV ID] and labels not in ('DDR')","SF-depends on") AND Status not in (closed,verified)
-	issueFunction in linkedIssuesOf("fixVersion = [FV ID] and labels not in ('DDR')","SS-depends on") AND Status not in (closed,verified)
-	issueFunction in subtasksOf("fixVersion = [FV ID] and labels not in ('DDR') AND STATUS NOT IN (CLOSED)") and status not in (closed,verified)
+	issueFunction in linkedIssuesOf("fixVersion = '[RELEASE NAME]' and labels not in ('DDR')","Blocked by") AND Status not in (closed,verified, Deployed) OR 
+	issueFunction in linkedIssuesOf("fixVersion = '[RELEASE NAME]' and labels not in ('DDR')","FF-depends on") AND Status not in (closed,verified, Deployed) OR
+	issueFunction in linkedIssuesOf("fixVersion = '[RELEASE NAME]' and labels not in ('DDR')","FS-depends on") AND Status not in (closed,verified, Deployed) OR
+	issueFunction in linkedIssuesOf("fixVersion = '[RELEASE NAME]' and labels not in ('DDR')","is fixed by") AND Status not in (closed,verified, Deployed) OR 
+	issueFunction in linkedIssuesOf("fixVersion = '[RELEASE NAME]' and labels not in ('DDR')","SF-depends on") AND Status not in (closed,verified, Deployed) OR 
+	issueFunction in linkedIssuesOf("fixVersion = '[RELEASE NAME]' and labels not in ('DDR')","SS-depends on") AND Status not in (closed,verified, Deployed) OR 
+	issueFunction in subtasksOf("fixVersion = '[RELEASE NAME]' and labels not in ('DDR')") and status not in (closed,verified, Deployed) OR
+	issuefunction not in hasLinkType('Fixed by') and fixVersion = '[RELEASE NAME]' and devstatus.customfield.development.name[commits].all < 1 and labels not in (deployment)
 
 Things to address:
 )
