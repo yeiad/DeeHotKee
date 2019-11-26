@@ -7,8 +7,7 @@ DefineProcedureconstants:
     [ ] Tickets status*****************************************************
     [ ] MS Teams***********************************************************
     [ ] Unread emails******************************************************
-	[ ] Monthly procedure**************************************************
-	[ ] Weekday************************************************************
+	[ ] Non-Daily Procedure************************************************
 	[ ] Tasks**************************************************************
     [ ] Hotfix*************************************************************
     [ ] Update branches****************************************************
@@ -68,17 +67,21 @@ PostDeploymentChecklist =
 
 [ ] DEPLOYMENT FINALIZATION
 	[ ] Wait for QA's approval of the core checklist
-	[ ] Merge Rebase Release In Master *
-	[ ] Delete all branches of old tickets
-	[ ] remove release from script
-	[ ] Run update release branches script
-	[ ] force FixVersion in postdeployment script
+	[ ] MANUAL | Merge Rebase Release In Master
+	[ ] ----Delete all branches of old tickets---- NO ! *
+	[ ] MANUAL/NON-SCRIPTED | remove release from script
+	[ ] MANUAL/SEMI-SCRIPTED | Run update release branches script
+	[ ] force FixVersion in postdeployment script | php public/console.php PostDeployment -f release/19.09.1-wr-bansky
+	[ ] force FixVersion in deploy script
+	[ ] MANUAL | open every PR in stash to see if there are conflicts and open a conflict ticket as a subtask to the ticket that caused the crash
 	[ ] Run postdeployment deployment script
 	[ ] Run AnalyzePullRequests deployment script
 	[ ] Check the graph
 	[ ] Setup monocle stage-reservation for stage
+	[ ] Convert conflict tickets in subtask of proper ticket in release
+	[ ] Set an affect Version for conflict ticket
+	[ ] Change the assignee of the conflict tickets to the parent task' assignee
 	[ ] Send email to PM
-	[ ] put notes and template in release ticket*
 	[ ] Update templates for this procedure
 	[ ] Update this procedure
 )
@@ -164,10 +167,11 @@ ReleaseSetupChecklist =
 	[ ] Ensure All tickets are Resolved
 	[ ] Proceed with FIND RELEASE NAME procedure
 	[ ] Use the script createRelease
+	[ ] MANUAL/SCRIPT-IN-PROGRESS | Foreach ticket assign a fixVersion
 	[ ] Foreach ticket assign a fixVersion
 	[ ] proceed with AUTODEPLOY RELEASE procedure if necessary
 	[ ] Go back to ISSUE MITIGATION procedure
-	[ ] Foreach PR set destination to release branch
+	[ ] MANUAL/SCRIPT-IN-PROGRESS | Foreach PR set destination to release branch
 	[ ] Prepare the order of merging. Big tickets first, then small. Reducing conflict resolution volume
 	[ ] Procedure | Foreach ticket MERGE PR
 	[ ] If conflicts | wait until conflicts are resolved before proceeding
@@ -189,6 +193,7 @@ ReleaseSetupChecklist =
 	[ ] Ensure availability in Bamboo
 	[ ] If the stage is being shotgonned permanently, clearly label it
 	[ ] If stage is used proceed with SWAP STAGE procedure
+	[ ] Check in monocle
 	[ ] Update Procedure
 [ ] PREVIOUSLY MERGED CODE CHECK
     [ ] Check if commits exist on multiple branches
@@ -206,17 +211,21 @@ FindReleaseNameChecklist =
 (
 
 [ ] FIND RELEASE NAME
-	[ ] Use template to generate fixVersion name
-	[ ] Set parameters for createRelease command
-	[ ] Execute createRelease command
-	[ ] Execute postReleaseCreation command
-	[ ] Execute PostDeploymentConflictManagement command
-	[ ] Add start date to fixVersion
-	[ ] Prioratize fixVersion in the release management board
+	[ ] use deployment ticket number in branch name - scripts don't take that into account
+	[ ] Use template to generate fixVersion name matching naming convention
+	[ ] MANUAL/SCRIPTED | Create/Set FixVersion Name
+	[ ] MANUAL/SCRIPTED | Set FixVersion Description
+	[ ] MANUAL/SCRIPTED | Create a branch from master matching release name
+	[ ] MANUAL/SCRIPTED | Create/Edit a deployment ticket for release
+	[ ] SCRIPT | Set parameters for createRelease command
+	[ ] SCRIPT | Execute createRelease command
+	[ ] SCRIPT | Execute postReleaseCreation command
+	[ ] SCRIPT | Execute PostDeploymentConflictManagement command
+	[ ] MANUAL/NON-SCRIPTED | Add start date to fixVersion
+	[ ] MANUAL/NON-SCRIPTED | Prioratize fixVersion in the release management board
 	[ ] Add the fixVersion name to the "update branches script"
-	[ ] Add release label to whiteboard's calendar
-	[ ] Add release label to whiteboard's list of releases
 	[ ] Update Procedure
+	[ ] Update template
 )
 
 EssentialDeploymentToProdChecklist =
@@ -279,9 +288,6 @@ PreDeploymentReleaseValidationChecklist =
     [ ] proceed with NON BLOCKER procedure if necessary
     [ ] Ensure release branch is up to date with master
     [ ] Ensure release branch is up to date with branch currently deployed to production environment
-    [ ] Ensure depending tickets are done
-    [ ] Ensure subtasks are done
-    [ ] Ensure there are no tickets with no merged code
     [ ] Ensure absence of bogus commits
     [ ] Update this procedure
 )
@@ -441,6 +447,7 @@ DeployLockedReleaseChecklist =
 
 DeployHotfixToProdChecklist  =
 (
+
 [ ] HOTFIX LEVEL A
  	[ ] DEBUG AND FIX ON PRODUCTION ENVIRONMENT
  	[ ] BYPASS BAMBOO USE SFTP TO PUSH CODE
@@ -470,75 +477,94 @@ DeployHotfixToProdChecklist  =
  	[ ] Test hotfix on prod
  	[ ] Create hf fixversion and release
  	[ ] Validate hotfix flags in ticket
- 	[ ] set tickets to deployed
+ 	[ ] Change status of fixVersion
+	[ ] Set release date of fixVersion
  	[ ] Merge into master without peer reviewing
  	[ ] Update all release branches
+    [ ] Delete all branches of old tickets
+    [ ] force FixVersion in deploy script
+    [ ] force FixVersion in postdeployment script
+    [ ] Run postdeployment deployment script
+    [ ] Run AnalyzePullRequests deployment script
+    [ ] Convert conflict tickets in subtask of proper ticket in release
+    [ ] Set an affect Version for conflict ticket
+    [ ] Change the assignee of the conflict tickets to the parent task' assignee
+	[ ] Look at the graphs
  	[ ] Fill in the template
  	[ ] put notes in ticket
  	[ ] Send email to PM
  	[ ] Update this procedure
  	[ ] Update the template
-
-[ ] DEPLOY HOTFIX TICKET
-    [ ] Should someone approve the hotfix?
-    [ ] Get a list of tickets that will go in hotfix
-	[ ] Validate presence of hotfix label
-	[ ] Validate presence of hotfix effort type
-	[ ] Proceed with PR BASIC CHECK on all tickets
-	[ ] proceed with FIND RELEASE NAME
-	[ ] Setup branch in bamboo for hotfix branch
-	[ ] Proceed with MERGE PR procedure
-	[ ] Proceed with DEPLOY LOCKED RELEASE procedure to stage
-	[ ] proceed with POST-DEPLOYMENT procedure
-	[ ] if QA approve core checklist proceed with DEPLOYMENT FINALIZATION procedure * for stage
-	[ ] Get QA verification
-	[ ] Proceed with DEPLOY LOCKED RELEASE procedure to prod
-	[ ] Check the graphs
-	[ ] Proceed with POST-DEPLOYMENT procedure
-	[ ] if QA approve core checklist proceed with DEPLOYMENT FINALIZATION procedure * for prod
-	[ ] Update the procedure
 )
 
 ReleaseSetupTemplate =
     (
 
 -------------RELEASE SETUP------------------------------------------
-Time Stamp:
-Title:
-People Involved:
-Stage:
-MS Teams Thread:
-Tickets:
+h1. fixVersion Information
+|fixVersionID| |
+|fixVersionName| |
+|Type:|technical standalone|
+
+h2. Attributes
+||Attribute||Value||Validated on||Goal Value||
+|Owner:| | | |
+|Hotfix:| | | |
+|Accountable:| | | |
+|Schedule:| | | |
+|Sprint:| | |Sprinted|
+|Branch:| | |Branched|
+|State:|  | |Clean|
+|Plan:|  | |Technical AND Business|
+|Lock:| | |Locked|
+|Stage:|  | |Staged|
+|Status:|  | |Ready for QA|
+h2. Attributes Details
+||Attribute||Details||Change||Time of change||
+|Type|  | | |
+|Scheduled:|  | | |
+|Sprint:|  | | |
+|Branch|  | | |
+h2. Next Actions in Order:
+||Role||Action||Status||Date completed||
+|Team planner| |  | |
+|BuildMaster|Classify FixVersion|  | |
+|Build Master|Name the fixVersion|  | |
+|Build Master|Determine State of Release|  | |
+|BE & FE|Complete all development|  | |
+|BE, FE, QA| |  | |
+|Build Master|Determine State of Release|  | |
+|Build Master|Lock the release|  | |
+|Developer|Merge all PRs in release branch|  | |
+|Build Master|Stage release|  | |
+|QA|Test on stage|in progress| |
+h2. Other info
+||what ?||value||date updated||
+|MS Teams convos| | |
+|Tickets| | |
     )
 
 FindReleaseNameTemplate =
 (
 
 ----FIND RELEASE NAME--------------------------------
-
-Week number:
-	[yy].[m].[wom]
-
-suffix:
-	 wr: weekly release / standard release
-	 sa: standalone
-	 rn: Reflected Network
+Suffix:
+		rr          Regular/Blanket
+		sa          Standalone
+		osa:		Obvious
+		ftsa:		Feature
+		fxsa		Flexible
+		ocsa		Oncall
+		tcsa		Technical
+		hf          Hotfix
+		nd          NonDeployable (Release Planning In Progress)
 
 prefix:
     release/
     hotfix/
 
 Release name:
-	release/[week number]-[suffix]-[cool name]
-
-
-Summary:			{[DEPLOYMENT]} [Release name]
-work effort type: 	Documentation
-fixversion :		release/19.6.2-sa-country-search
-Component:			Back End
-Assignee:			Me
-Description:		Document Deployment notes for this release
-Sprint:				Current Sprint
+	[prefix]/[yy].[m].[wom]-[suffix]-[cool name]
 
 )
 
@@ -559,15 +585,12 @@ EPIC LINKS:
 RELEASE TICKET:
 	[LINK]
 
-TESTING PARTY:
-	REPORTERS:
+PARTIES:
+    REPORTERS:
 
 	DEVS:
 
 	TESTERS:
-
-
-MS TEAMS CONVERSATIONS:
 
 Core checklist:
 	[ ] Sign In
@@ -588,14 +611,116 @@ JQL TEMPLATES:
 	SF-depends on
 	SS-depends on
 
-	issueFunction in linkedIssuesOf("fixVersion = '[RELEASE NAME]' and labels not in ('DDR')","Blocked by") AND Status not in (closed,verified, Deployed) OR 
-	issueFunction in linkedIssuesOf("fixVersion = '[RELEASE NAME]' and labels not in ('DDR')","FF-depends on") AND Status not in (closed,verified, Deployed) OR
-	issueFunction in linkedIssuesOf("fixVersion = '[RELEASE NAME]' and labels not in ('DDR')","FS-depends on") AND Status not in (closed,verified, Deployed) OR
-	issueFunction in linkedIssuesOf("fixVersion = '[RELEASE NAME]' and labels not in ('DDR')","is fixed by") AND Status not in (closed,verified, Deployed) OR 
-	issueFunction in linkedIssuesOf("fixVersion = '[RELEASE NAME]' and labels not in ('DDR')","SF-depends on") AND Status not in (closed,verified, Deployed) OR 
-	issueFunction in linkedIssuesOf("fixVersion = '[RELEASE NAME]' and labels not in ('DDR')","SS-depends on") AND Status not in (closed,verified, Deployed) OR 
-	issueFunction in subtasksOf("fixVersion = '[RELEASE NAME]' and labels not in ('DDR')") and status not in (closed,verified, Deployed) OR
-	issuefunction not in hasLinkType('Fixed by') and fixVersion = '[RELEASE NAME]' and devstatus.customfield.development.name[commits].all < 1 and labels not in (deployment)
+STAGE:
+`(
+   `(
+        `(
+            issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "Blocked by"
+                `)
+             OR issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "FF-depends on"
+                `)
+             OR issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "FS-depends on"
+                `)
+             OR issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "is fixed by"
+                `)
+             OR issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "SF-depends on"
+                `)
+             OR issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "SS-depends on"
+                `)
+             OR issueFunction IN subtasksOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `) AND status NOT IN `(open`)"
+                    `)
+        `) AND STATUS NOT IN `(CLOSED`) AND `(fixVersion IS EMPTY or fixVersion NOT IN`('[RELEASE NAME]'`)`)
+   `) OR `(
+                issuefunction NOT IN
+                    hasLinkType`('Fixed by'`)
+                    AND fixVersion = '[RELEASE NAME]'
+                    AND devstatus.customfield.development.name[commits].all < 1
+                    AND STATUS NOT IN `("in progress","BLOCKED","open"`)
+                    AND issueFunction not in parentsOf`('status not in `(closed`)'`)
+    `) OR `(
+            fixVersion = '[RELEASE NAME]' AND labels IN `(
+                'inform_stakeholder',
+                'deploy-tasks',
+                'command-to-run',
+                'deploy-task'
+          `)
+   `) OR `(
+            issueFunction IN subtasksOf`(
+                "fixVersion = '[RELEASE NAME]'
+                AND devstatus.customfield.development.name[commits].all > 0
+                AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `) AND STATUS NOT IN `('open','under review','in progress'`)"
+            `) AND devstatus.customfield.development.name[commits].all > 0
+       `)
+`) AND `(labels NOT IN `(deployment,DDR`) OR labels IS EMPTY`)
+
+PROD:
+`(
+	`(
+        `(
+            issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "Blocked by"
+                `)
+             OR issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "FF-depends on"
+                `)
+             OR issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "FS-depends on"
+                `)
+             OR issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "is fixed by"
+                `)
+             OR issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "SF-depends on"
+                `)
+             OR issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "SS-depends on"
+                `)
+             OR issueFunction IN subtasksOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)"
+                    `)
+        `) AND STATUS NOT IN `(CLOSED`)
+	`) OR `(
+                issuefunction NOT IN
+                    hasLinkType`('Fixed by'`)
+                    AND fixVersion = '[RELEASE NAME]'
+                    AND devstatus.customfield.development.name[commits].all < 1
+                    AND STATUS NOT IN `("in progress","BLOCKED"`)
+                    AND issueFunction not in parentsOf`('status not in `(closed`)'`)
+    `) OR `(
+            fixVersion = '[RELEASE NAME]' AND labels IN `(
+                'inform_stakeholder',
+                'deploy-tasks',
+                'command-to-run',
+                'deploy-task'
+		    `)
+	`) OR `(
+            issueFunction IN subtasksOf`(
+                "fixVersion = '[RELEASE NAME]'
+                AND devstatus.customfield.development.name[commits].all > 0
+                AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)"
+            `) AND devstatus.customfield.development.name[commits].all > 0
+	    `)
+`) AND `(labels NOT IN `(deployment,DDR`) OR labels IS EMPTY`)
+
 
 Things to address:
 )
@@ -611,7 +736,8 @@ DeployHotfixToProdTemplate =
 	[ ] Team should be informed ASAP
 ------HOTFIX LEVEL C PRE REQUESITS---------------------
 	[ ] Team must be informed before proceeding
-	[ ] One of the pillers of tube's site is down
+    [ ] Production environment is behind master and preventing deployments
+    [ ] One of the pillers of tube's site is down
 		[ ] ads
 		[ ] search
 		[ ] sign in
@@ -650,7 +776,7 @@ MS TEAMS:
 
 ::prdpprch::
     gosub DefineProcedureconstants
-    Clipboard := DeployToProdChecklist . PreDeploymentTasksChecklist . PreDeploymentReleaseValidationChecklist . DeploymentNoticesValidationChecklist . DeployLockedReleaseChecklist . PostDeploymentChecklist
+    Clipboard := DeployToProdChecklist . PreDeploymentTasksChecklist . PreDeploymentReleaseValidationChecklist . DeployLockedReleaseChecklist . PostDeploymentChecklist
     SendInput ^v
     return
 
