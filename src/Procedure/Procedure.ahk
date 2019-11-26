@@ -196,8 +196,9 @@ ReleaseSetupChecklist =
 	[ ] Check in monocle
 	[ ] Update Procedure
 [ ] PREVIOUSLY MERGED CODE CHECK
-    [ ] Check if commits exist on multiple branches
-    [ ] Check if commits from other tickets are in the branch
+    [ ] On diff between release branch and master - Check commits , make sure all tickets are in the fixVersion
+    [ ] On un-merged ticket branches - Check if commits exist on multiple branches
+    [ ] On un-merged ticket branches - Check if commits from other tickets are in the branch
 	[ ] Put label 'faklfjhafdafh'
 	[ ] For each of faklfjhafdafh tickets proceed with TICKET AVOID CONTAMINATION  proceedure
 	[ ] If there is faklfjhafdafh tickets proceed with RELEASE AVOID CONTAMINATION procedure
@@ -502,42 +503,42 @@ ReleaseSetupTemplate =
 
 -------------RELEASE SETUP------------------------------------------
 h1. fixVersion Information
-|fixVersionID| |
+|fixVersionID| |
 |fixVersionName| |
-|Type:|technical standalone|
+|Type:||
 
 h2. Attributes
 ||Attribute||Value||Validated on||Goal Value||
-|Owner:| | | |
-|Hotfix:| | | |
-|Accountable:| | | |
-|Schedule:| | | |
-|Sprint:| | |Sprinted|
-|Branch:| | |Branched|
-|State:|  | |Clean|
-|Plan:|  | |Technical AND Business|
-|Lock:| | |Locked|
-|Stage:|  | |Staged|
-|Status:|  | |Ready for QA|
+|Owner:| | | |
+|Hotfix:| | | |
+|Accountable:| | | |
+|Schedule:| | | |
+|Sprint:| | |Sprinted|
+|Branch:| | |Branched|
+|State:|  | |Clean|
+|Plan:|  | |Technical AND Business|
+|Lock:| | |Locked|
+|Stage:|  | |Staged|
+|Status:|  | |Ready for QA|
 h2. Attributes Details
 ||Attribute||Details||Change||Time of change||
-|Type|  | | |
-|Scheduled:|  | | |
-|Sprint:|  | | |
-|Branch|  | | |
+|Type|  | | |
+|Scheduled:|  | | |
+|Sprint:|  | | |
+|Branch|  | | |
 h2. Next Actions in Order:
 ||Role||Action||Status||Date completed||
-|Team planner| |  | |
-|BuildMaster|Classify FixVersion|  | |
-|Build Master|Name the fixVersion|  | |
-|Build Master|Determine State of Release|  | |
-|BE & FE|Complete all development|  | |
-|BE, FE, QA| |  | |
-|Build Master|Determine State of Release|  | |
-|Build Master|Lock the release|  | |
-|Developer|Merge all PRs in release branch|  | |
-|Build Master|Stage release|  | |
-|QA|Test on stage|in progress| |
+|Team planner| |  | |
+|BuildMaster|Classify FixVersion|  | |
+|Build Master|Name the fixVersion|  | |
+|Build Master|Determine State of Release|  | |
+|BE & FE|Complete all development|  | |
+|BE, FE, QA| |  | |
+|Build Master|Determine State of Release|  | |
+|Build Master|Lock the release|  | |
+|Developer|Merge all PRs in release branch|  | |
+|Build Master|Stage release|  | |
+|QA|Test on stage|in progress| |
 h2. Other info
 ||what ?||value||date updated||
 |MS Teams convos| | |
