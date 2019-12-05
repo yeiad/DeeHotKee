@@ -42,6 +42,11 @@ goToPosition(position)
         number:=130
     }
 
+    if (position = time)
+    {
+        number:=10
+    }
+
     SendInput {home}
 
     loop %number%

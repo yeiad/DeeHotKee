@@ -85,6 +85,11 @@ timelogcontent:
     goToPosition(4)
     return
 
+::tlpt::    ;Time Log Position time : change time of timelog
+    fix()
+    goToPosition(time4)
+    return
+
 ::tlis::    ; Time Log Internal Support
     fix()
     insertTicketAndShortDescription(InternalSupportTicket)
