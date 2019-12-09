@@ -1,15 +1,21 @@
+;##################################################
+;#ALL VARIABLES SHOULD GO BELLOW THIS
+;##################################################
+DefineProcedureconstants:
+
 BaseChecklist =
 (
 
 [ ] Base checklist
-    [ ] Update procedure directly in 'hotkeys' project
+    [ ] Update procedure directly in hotkeys project
     [ ] Finish time log and start new one
     [ ] Put notes in jira ticket and update fields
     [ ] Read notes/tasks to do
     [ ] Communicate if necessary
     [ ] commit workDocs
+    [ ] update Wiki
 )
-DefineProcedureconstants:
+
     DailyProcedureChecklist =
     (
 
@@ -49,21 +55,23 @@ DefineProcedureconstants:
 DeployToProdChecklist =
 (
 
-[ ] DEPLOYMENT TO PRODUCTION
+[ ] PROD DEPLOYMENT CONSIDERATION
+    [ ] Any alteration to database must be consulted with a GDPR expert, aka Andrei Ticala
     [ ] If there's a disaster that's mitigated, put the label 'disaster_mitigated' and write notes of why it was mitigated.
     [ ] Take into account business concerns like holidays and important features and third parties like DD, algolia, etc.
-	[ ] Proceed with PRE-DEPLOYMENT TASKS procedure
-	[ ] Proceed with PRE-DEPLOYMENT RELEASE VALIDATION procedure
 	[ ] Every time the graph is checked, communicate with the team
 	[ ] Before every attempt of deployment make sure QA is available
 	[ ] Before every attempt of deployment inform team
 	[ ] At every hiccup, inform the team
 	[ ] Communicate with team when deployment is live
+
+[ ] DEPLOYMENT TO PRODUCTION
+	[ ] Proceed with PRE-DEPLOYMENT TASKS procedure
+	[ ] Proceed with PRE-DEPLOYMENT RELEASE VALIDATION procedure
 	[ ] proceed with DEPLOY LOCKED RELEASE procedure
 	[ ] Proceed with POST-DEPLOYMENT procedure
 	[ ] proceed with DEPLOYMENT FINALIZATION procedure
-	[ ] Update this procedure
-	[ ] Update this template
+
 )
 
 PostDeploymentChecklist =
@@ -120,7 +128,6 @@ PreDeploymentTasksChecklist =
     [ ] QA OK to go
     [ ] 3rd party OK to go
     [ ] Go back to previous checklist
-    [ ] Update this procedure
 )
 
 CreateABunchOfReleasesChecklist =
@@ -347,8 +354,6 @@ PreDeploymentReleaseValidationChecklist =
     [ ] Ensure release branch is up to date with master
     [ ] Ensure release branch is up to date with branch currently deployed to production environment
     [ ] Ensure absence of bogus commits
-    [ ] Go back to previous checklist
-    [ ] Update this procedure
     [ ] Go back to previous checklist
 )
 
@@ -683,9 +688,19 @@ Core checklist:
 	[ ] Pagination
 	[ ] Search
 	[ ] Mobile Popunders
-	[ ] VPN test Mobile & PC
-	[ ] CHECK SEGMENTS
-	[ ] CHECK OTHER DOMAINS
+	[ ] VPN/isMindGeekIP validations
+	[ ] TV
+	[ ] Tablet
+	[ ] Mobile
+	[ ] Lite Mobile
+	[ ] Gay
+	[ ] Shemale
+	[ ] Spanish
+	[ ] German
+	[ ] Japanese
+	[ ] MegaMenu
+	[ ] Cache invalidation - empty spots
+
 
 JQL TEMPLATES:
 	Blocked by
