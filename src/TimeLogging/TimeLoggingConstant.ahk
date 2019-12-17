@@ -6,7 +6,7 @@ TicketOfTheDay          := "TE-xxxxx | ********************** |"    ;   tltd
 ServerMaintenanceTicket := "TE-XXXXX | Sprinted Automation*** |"    ;   tlsm
 
 ; sprinted
-DeploymentTicket        := "TE-17024 | Deployment************ |"    ;   tldp
+DeploymentTicket        := "TE-17126 | Deployment************ |"    ;   tldp
 ServerMaintenanceTicket := "TE-16949 | Server Maintenance**** |"    ;   tlsm
 
 ; not sprinted
