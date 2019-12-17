@@ -55,6 +55,14 @@ BaseChecklist =
 DeployToProdChecklist =
 (
 
+[ ] DEPLOYMENT TO PRODUCTION
+	[ ] Proceed with PROD DEPLOYMENT CONSIDERATION
+	[ ] Proceed with PRE-DEPLOYMENT CONDITIONS procedure
+	[ ] Proceed with PRE-DEPLOYMENT RELEASE VALIDATION procedure
+	[ ] proceed with DEPLOY LOCKED RELEASE procedure
+	[ ] Proceed with POST-DEPLOYMENT procedure
+	[ ] proceed with DEPLOYMENT FINALIZATION procedure
+	[ ] Go to previous checklist
 [ ] PROD DEPLOYMENT CONSIDERATION
 	[ ] Any alteration to database must be consulted with a GDPR expert, aka Andrei Ticala
 	[ ] If there's a disaster that's mitigated, put the label 'disaster_mitigated' and write notes of why it was mitigated.
@@ -65,14 +73,6 @@ DeployToProdChecklist =
 	[ ] At every hiccup, inform the team
 	[ ] Communicate with team when deployment is live
 	[ ] Go to previous checklist
-
-[ ] DEPLOYMENT TO PRODUCTION
-	[ ] Proceed with PRE-DEPLOYMENT TASKS procedure
-	[ ] Proceed with PRE-DEPLOYMENT RELEASE VALIDATION procedure
-	[ ] proceed with DEPLOY LOCKED RELEASE procedure
-	[ ] Proceed with POST-DEPLOYMENT procedure
-	[ ] proceed with DEPLOYMENT FINALIZATION procedure
-
 )
 
 PostDeploymentChecklist =
@@ -118,8 +118,7 @@ PostDeploymentChecklist =
 PreDeploymentTasksChecklist =
 (
 
-[ ] PRE-DEPLOYMENT TASKS
-	[ ] Fill Procedure Template
+[ ] PRE-DEPLOYMENT CONDITIONS
 	[ ] Not Friday
 	[ ] Testers are available for 1h
 	[ ] Testers not on lunch
@@ -371,6 +370,8 @@ PreDeploymentReleaseValidationChecklist =
 (
 
 [ ] PRE-DEPLOYMENT RELEASE VALIDATION
+	[ ] Fill Procedure Template
+	[ ] Previous deployment completed successfully
 	[ ] Ensure all tickets are verified
 	[ ] Ensure monocole stage availability doesn't show any problems
 	[ ] Replace fixVersion in JQL in template and run it
@@ -791,68 +792,72 @@ STAGE:
 
 PROD:
 `(
-	`(
-		`(
-			issueFunction IN linkedIssuesOf`(
-					"fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
-					"Blocked by"
-				`)
-			 OR issueFunction IN linkedIssuesOf`(
-					"fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
-					"FF-depends on"
-				`)
-			 OR issueFunction IN linkedIssuesOf`(
-					"fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
-					"FS-depends on"
-				`)
-			 OR issueFunction IN linkedIssuesOf`(
-					"fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
-					"is fixed by"
-				`)
-			 OR issueFunction IN linkedIssuesOf`(
-					"fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
-					"SF-depends on"
-				`)
-			 OR issueFunction IN linkedIssuesOf`(
-					"fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
-					"SS-depends on"
-				`)
-			 OR issueFunction IN subtasksOf`(
-					"fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)"
-					`) AND TYPE NOT IN ("Technical Task-Bug")
-		`)
-		AND STATUS NOT IN `(CLOSED`) AND fixVersion != "[RELEASE NAME]"
-	`)
-	OR `(
-			issuefunction NOT IN hasLinkType`('Fixed by'`)
-			AND fixVersion = '[RELEASE NAME]'
-			AND devstatus.customfield.development.name[commits].all < 1
-			AND STATUS NOT IN `("in progress","BLOCKED", CLOSE`)
-			AND issueFunction not in parentsOf`("status not in `(closed`)"`)
-	`)
-	OR `(
-			fixVersion = '[RELEASE NAME]' AND labels IN `(
-				'inform_stakeholder',
-				'deploy-tasks',
-				'command-to-run',
-				'deploy-task'
-			`)
-	`)
-	OR `(
-			fixVersion = '[RELEASE NAME]' AND labels IN `(
-				'merge_related'
-			`)
-			AND STATUS != closed
-	`)
-	OR `(
-			issueFunction IN subtasksOf`(
-				"fixVersion = '[RELEASE NAME]'
-				AND devstatus.customfield.development.name[commits].all > 0
-				AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)"
-			`)
-			AND devstatus.customfield.development.name[commits].all > 0
-			AND issue.property[development].openprs > 0
-	`)
+    `(
+        `(
+            issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "Blocked by"
+                `)
+             OR issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "FF-depends on"
+                `)
+             OR issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "FS-depends on"
+                `)
+             OR issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "is fixed by"
+                `)
+             OR issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "SF-depends on"
+                `)
+             OR issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "SS-depends on"
+                `)
+             OR issueFunction IN subtasksOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)"
+                    `) AND TYPE NOT IN ("Technical Task-Bug")
+        `)
+        AND STATUS NOT IN `(CLOSED`) AND fixVersion != "[RELEASE NAME]"
+    `)
+    OR `(
+            issuefunction NOT IN hasLinkType`('Fixed by'`)
+            AND fixVersion = '[RELEASE NAME]'
+            AND devstatus.customfield.development.name[commits].all < 1
+            AND STATUS NOT IN `("in progress","BLOCKED", CLOSED`)
+            AND issueFunction not in parentsOf`("status not in `(closed`)"`)
+    `)
+    OR `(
+            fixVersion = '[RELEASE NAME]' AND labels IN `(
+                'inform_stakeholder',
+                'deploy-tasks',
+                'command-to-run',
+                'deploy-task'
+            `)
+    `)
+    OR `(
+            fixVersion = '[RELEASE NAME]' AND labels IN `(
+                'merge_related'
+            `)
+            AND STATUS != closed
+    `)
+    OR `(
+            fixVersion = '[RELEASE NAME]'
+            AND STATUS NOT IN `(Closed,Verified`)
+    `)
+    OR `(
+            issueFunction IN subtasksOf`(
+                "fixVersion = '[RELEASE NAME]'
+                AND devstatus.customfield.development.name[commits].all > 0
+                AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)"
+            `)
+            AND devstatus.customfield.development.name[commits].all > 0
+            AND issue.property[development].openprs > 0
+    `)
 `)
 AND `(labels NOT IN `(deployment,DDR`) OR labels IS EMPTY`)
 
