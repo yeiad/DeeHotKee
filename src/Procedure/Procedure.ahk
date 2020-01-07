@@ -388,6 +388,7 @@ DeploymentNoticesValidationChecklist =
 [ ] DEPLOYMENT NOTICES VALIDATION
 	[ ] Check 'inform_stakeholder' label
 	[ ] Check 'deploy-tasks' label
+	[ ] Check 'action-prod' label
 	[ ] Check 'command-to-run' label
 	[ ] Check 'deploy-task' label
 	[ ] Update this procedure
@@ -796,6 +797,7 @@ STAGE:
             fixVersion = '[RELEASE NAME]' AND labels IN `(
                 'inform_stakeholder',
                 'deploy-tasks',
+                'action-prod',
                 'command-to-run',
                 'deploy-task'
           `)
@@ -868,6 +870,7 @@ PROD:
             fixVersion = '[RELEASE NAME]' AND labels IN `(
                 'inform_stakeholder',
                 'deploy-tasks',
+                'action-prod',
                 'command-to-run',
                 'deploy-task'
             `)
