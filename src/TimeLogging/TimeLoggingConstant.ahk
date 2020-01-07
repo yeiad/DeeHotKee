@@ -1,4 +1,4 @@
-logspath                :=  A_MyDocuments .  "\logs\"               ;   tlsf
+logspath                :=  "%userprofile%\PhpstormProjects\workDocs\logs\dated\"               ;   tlsf
 needsFix                := true
 
 ; personal tickets

@@ -57,8 +57,8 @@ DeployToProdChecklist =
 
 [ ] DEPLOYMENT TO PRODUCTION
 	[ ] Proceed with PROD DEPLOYMENT CONSIDERATION
-	[ ] Proceed with PRE-DEPLOYMENT CONDITIONS procedure
 	[ ] Proceed with PRE-DEPLOYMENT RELEASE VALIDATION procedure
+	[ ] Proceed with PRE-DEPLOYMENT CONDITIONS procedure
 	[ ] proceed with DEPLOY LOCKED RELEASE procedure
 	[ ] Proceed with POST-DEPLOYMENT procedure
 	[ ] proceed with DEPLOYMENT FINALIZATION procedure
@@ -734,61 +734,94 @@ JQL TEMPLATES:
 	is fixed by
 	SF-depends on
 	SS-depends on
+##############################
+######check diff with master:
+##############################
+clear &&
+cd ~/PhpstormProjects/tube8.front.deployment &&
+git fetch --all &&
+git log origin/[RELEASE NAME]..origin/master
 
 STAGE:
-`(
+   ################################
+   # Dependency issues #
+   ################################
    `(
-		`(
-			issueFunction IN linkedIssuesOf`(
-					"fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
-					"Blocked by"
-				`)
-			 OR issueFunction IN linkedIssuesOf`(
-					"fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
-					"FF-depends on"
-				`)
-			 OR issueFunction IN linkedIssuesOf`(
-					"fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
-					"FS-depends on"
-				`)
-			 OR issueFunction IN linkedIssuesOf`(
-					"fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
-					"is fixed by"
-				`)  AND fixVersion != "[RELEASE NAME]"
-			 OR issueFunction IN linkedIssuesOf`(
-					"fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
-					"SF-depends on"
-				`)
-			 OR issueFunction IN linkedIssuesOf`(
-					"fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
-					"SS-depends on"
-				`)
-			 OR issueFunction IN subtasksOf`(
-					"fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `) AND status NOT IN `(open`)"
-					`)
-		`) AND STATUS NOT IN `(CLOSED`) AND fixVersion != "[RELEASE NAME]"
-   `) OR `(
-				issuefunction NOT IN
-					hasLinkType`('Fixed by'`)
-					AND fixVersion = '[RELEASE NAME]'
-					AND devstatus.customfield.development.name[commits].all < 1
-					AND STATUS NOT IN `("in progress","BLOCKED","open"`)
-					AND issueFunction not in parentsOf`("status not in `(closed`)"`)
-	`) OR `(
-			fixVersion = '[RELEASE NAME]' AND labels IN `(
-				'inform_stakeholder',
-				'deploy-tasks',
-				'command-to-run',
-				'deploy-task'
-		  `)
-   `) OR `(
-			issueFunction IN subtasksOf`(
-				"fixVersion = '[RELEASE NAME]'
-				AND devstatus.customfield.development.name[commits].all > 0
-				AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `) AND STATUS NOT IN `('open','under review','in progress'`)"
-			`) AND devstatus.customfield.development.name[commits].all > 0 AND issue.property[development].openprs > 0
-	   `)
-`) AND `(labels NOT IN `(deployment,DDR`) OR labels IS EMPTY`)
+        `(
+            issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "Blocked by"
+                `)
+             OR issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "FF-depends on"
+                `)
+             OR issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "FS-depends on"
+                `)
+             OR issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "is fixed by"
+                `)  AND fixVersion != "[RELEASE NAME]"
+             OR issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "SF-depends on"
+                `)
+             OR issueFunction IN linkedIssuesOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `)",
+                    "SS-depends on"
+                `)
+             OR issueFunction IN subtasksOf`(
+                    "fixVersion = '[RELEASE NAME]' AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `) AND status NOT IN `(open`)"
+                    `)
+        `) AND STATUS NOT IN `(CLOSED`) AND fixVersion != "[RELEASE NAME]"
+
+   `)  AND `(labels NOT IN `(deployment,DDR`) OR labels IS EMPTY`)
+    ########################
+    # Issues with no code #
+    ########################
+    `(
+        issuefunction NOT IN hasLinkType`('Fixed by'`)
+        AND fixVersion = '[RELEASE NAME]'
+        AND devstatus.customfield.development.name[commits].all < 1
+        AND STATUS NOT IN `("in progress","BLOCKED","open"`)
+        AND issueFunction not in parentsOf`("status not in `(closed`)"`)
+    `)
+    AND `(labels NOT IN `(deployment,DDR`) OR labels IS EMPTY`)
+    ################################################
+    # Issues That need intervention ################
+    ################################################
+     `(
+            fixVersion = '[RELEASE NAME]' AND labels IN `(
+                'inform_stakeholder',
+                'deploy-tasks',
+                'command-to-run',
+                'deploy-task'
+          `)
+   `) AND `(labels NOT IN `(deployment,DDR`) OR labels IS EMPTY`)
+    ################################################
+    # Story is finished but subtask is in progress #
+    ################################################
+    (
+        issueFunction IN subtasksOf`(
+            "fixVersion = '[RELEASE NAME]'
+            AND devstatus.customfield.development.name[commits].all > 0
+            AND `(labels IS EMPTY  OR labels NOT  IN `('ddr','deployment'`) `) AND STATUS NOT IN `('open','under review','in progress'`)"
+        `) AND devstatus.customfield.development.name[commits].all > 0 AND issue.property[development].openprs > 0
+   `) AND `(labels NOT IN `(deployment,DDR`) OR labels IS EMPTY`)
+    ################################################
+    # Tickets that are not ready to test #
+    ################################################
+    `(
+         fixVersion = '[RELEASE NAME]' AND STATUS NOT IN `("on stage", deployed, closed`, "verified")
+   `) AND `(labels NOT IN `(deployment,DDR`) OR labels IS EMPTY`)
+    ################################################
+    # Tickets that are not dev-verified-stage #
+    ################################################
+    `(
+         fixVersion = '[RELEASE NAME]' AND STATUS NOT IN `(, deployed, closed, verified`)
+   `) AND `(labels NOT IN `(deployment,DDR,dev-verified-stage`) OR labels IS EMPTY`) ORDER BY assignee
 
 PROD:
 `(
@@ -846,10 +879,6 @@ PROD:
             AND STATUS != closed
     `)
     OR `(
-            fixVersion = '[RELEASE NAME]'
-            AND STATUS NOT IN `(Closed,Verified`)
-    `)
-    OR `(
             issueFunction IN subtasksOf`(
                 "fixVersion = '[RELEASE NAME]'
                 AND devstatus.customfield.development.name[commits].all > 0
@@ -860,7 +889,10 @@ PROD:
     `)
 `)
 AND `(labels NOT IN `(deployment,DDR`) OR labels IS EMPTY`)
-
+OR `(
+        fixVersion = '[RELEASE NAME]'
+        AND STATUS NOT IN `(Closed,Verified`)
+`)
 
 Things to address:
 )
@@ -916,7 +948,7 @@ MS TEAMS:
 
 ::prdpprch::
 	gosub DefineProcedureconstants
-	 Clipboard := BaseChecklist . DeployToProdChecklist . PreDeploymentTasksChecklist . PreDeploymentReleaseValidationChecklist . DeployLockedReleaseChecklist . PostDeploymentChecklist
+	 Clipboard := BaseChecklist . DeployToProdChecklist . PreDeploymentReleaseValidationChecklist . PreDeploymentTasksChecklist . DeployLockedReleaseChecklist . PostDeploymentChecklist
 	SendInput ^v
 	return
 

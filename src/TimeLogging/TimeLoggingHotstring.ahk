@@ -26,7 +26,9 @@
 ::tlsf::            ;Time Log File Save
     FormatTime, CurrentDateTime,, yy.MM.dd.HH.mm.ss.
     FormatTime, CurrentDateTimeDayTwo,, ddd
-    Sendinput ^s %logspath%%CurrentDateTime%%CurrentDateTimeDayTwo%.txt
+    Sendinput ^s
+    sleep, 175
+    SendInput %logspath%%CurrentDateTime%%CurrentDateTimeDayTwo%.txt {ENTER}
     return
 
 ::tlnl::            ; Time Log New Line
