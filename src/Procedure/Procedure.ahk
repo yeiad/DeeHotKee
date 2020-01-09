@@ -373,6 +373,7 @@ PreDeploymentReleaseValidationChecklist =
 	[ ] Fill Procedure Template
 	[ ] Previous deployment completed successfully
 	[ ] Ensure all tickets are verified
+	[ ] Ensure the absence of PRs pointing to [RELEASE NAME]
 	[ ] Ensure monocole stage availability doesn't show any problems
 	[ ] Replace fixVersion in JQL in template and run it
 	[ ] proceed with NON BLOCKER procedure if necessary
@@ -687,6 +688,15 @@ DeployToProdTemplate =
 TIMESTAMP:
 	[TIMESTAMP]
 
+BAMBOO BUILD ON STAGE:
+	[BUILD ID OR BUILD URL SOMETHING LIKE TE-TEF475-7 WHERE -7 IS THE 7TH BUILD]
+
+REVISION OF THE BUILD:
+	[GIT COMMIT HASH OR STASH URL FOR COMMIT]
+
+DEPLOYED TO STAGE ON:
+	[BUILD COMPLETION/AUTODEPLOYMENT DATE FOUND IN BAMBOO SOMETHING LIKE '08 Jan 2020, 3:57:39 PM – 20 hours ago']
+
 RELEASE INFORMATION:
 	[NAME | LINK]
 
@@ -899,6 +909,7 @@ AND `(labels NOT IN `(deployment,DDR`) OR labels IS EMPTY`)
 `(
         fixVersion = '[RELEASE NAME]'
         AND STATUS NOT IN `(Closed,Verified`)
+        AND `(LABELS NOT IN `('non-blocking'`) OR LABELS IS EMPTY)`
 `)
 
 
