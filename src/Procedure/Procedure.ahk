@@ -88,7 +88,7 @@ PostDeploymentChecklist =
 	[ ] MANUAL/NON-SCRIPTED | Update status on monocole
 	[ ] MANUAL | Verify Code Diff Quickly and proceed with BAD CODE ON PROD procedure if necessary
 	[ ] MANUAL | Check the graphs
-	[ ] Go back to previous checklist
+	> Check the box of this checklist and go back to previous checklist
 [ ] DEPLOYMENT FINALIZATION
 	[ ] MANUAL/NOT SCRIPTED | N/A | Wait for QA's approval of the core checklist
 	[ ] MANUAL/NOT SCRIPTED | N/A | Merge Rebase Release In Master
@@ -112,7 +112,7 @@ PostDeploymentChecklist =
 	[ ] MANUAL/NOT SCRIPTED | N/A | Change the assignee of the conflict tickets to the author of original commit/owner of parent task
 	[ ] MANUAL/NOT SCRIPTED | N/A | Send email to PM
 	[ ] MANUAL/NOT SCRIPTED | N/A | Close [RELEASE] ticket
-	[ ] Go back to previous checklist
+	> Check the box of this checklist and go back to previous checklist
 )
 
 PreDeploymentTasksChecklist =
@@ -125,7 +125,7 @@ PreDeploymentTasksChecklist =
 	[ ] Open MS Teams Thread
 	[ ] QA OK to go
 	[ ] 3rd party OK to go
-	[ ] Go back to previous checklist
+	> Check the box of this checklist and go back to previous checklist
 )
 
 CreateABunchOfReleasesChecklist =
@@ -241,7 +241,7 @@ PRBsicCheckChecklist =
 			[ ] MANUAL/NOT SCRIPTED | Check parent tasks is in the fixVersion
 			[ ] MANUAL/NOT SCRIPTED | Check sibling tasks is in the fixVersion
 			[ ] Put a label 'resolved_basic_check_done'
-	[ ] Go back to previous checklist
+	> Check the box of this checklist and go back to previous checklist
 )
 
 
@@ -284,12 +284,12 @@ ReleaseSetupChecklist =
 	[ ] Start a Release Discussion in MS Teams
 	[ ] Put link of Release Discussion in release ticket
 	[ ] Execute PostReleaseCreationValidation
-	[ ] Go back to previous checklist
+	> Check the box of this checklist and go back to previous checklist
 [ ] ISSUE MITIGATION
 	[ ] proceed with PREVIOUSLY MERGED CODE CHECK procedure
 	[ ] proceed with STAGE PREFERENCE CHECK procedure
 	[ ] Update Procedure
-	[ ] Go back to previous checklist
+	> Check the box of this checklist and go back to previous checklist
 )
 
 FindReleaseNameChecklist =
@@ -311,7 +311,7 @@ FindReleaseNameChecklist =
 	[ ] Add the fixVersion name to the "update branches script"
 	[ ] Update Procedure
 	[ ] Update template
-	[ ] Go back to previous checklist
+	> Check the box of this checklist and go back to previous checklist
 )
 
 EssentialDeploymentToProdChecklist =
@@ -359,11 +359,11 @@ EssentialDeploymentToProdChecklist =
 	[ ] Run AnalyzePullRequests deployment script
 	[ ] proceed with POST-DEPLOYMENT CHECKS procedure
 	[ ] Update this procedure
-	[ ] Go back to previous checklist
+	> Check the box of this checklist and go back to previous checklist
 [ ] POST-DEPLOYMENT CHECKS
 	[ ] If inform_stakeholder | Inform stakeholder
 	[ ] If inform_stakeholder | Remove the label
-	[ ] Go back to previous checklist
+	> Check the box of this checklist and go back to previous checklist
 )
 
 PreDeploymentReleaseValidationChecklist =
@@ -380,7 +380,7 @@ PreDeploymentReleaseValidationChecklist =
 	[ ] Ensure release branch is up to date with master
 	[ ] Ensure release branch is up to date with branch currently deployed to production environment
 	[ ] Ensure absence of bogus commits
-	[ ] Go back to previous checklist
+	> Check the box of this checklist and go back to previous checklist
 )
 
 DeploymentNoticesValidationChecklist =
@@ -393,7 +393,7 @@ DeploymentNoticesValidationChecklist =
 	[ ] Check 'command-to-run' label
 	[ ] Check 'deploy-task' label
 	[ ] Update this procedure
-	[ ] Go back to previous checklist
+	> Check the box of this checklist and go back to previous checklist
 )
 
 
@@ -414,7 +414,7 @@ EssentialReleaseCreationChecklist =
 	[ ] Inform team of the new release
 	[ ] Copy communication reference to release ticket
 	[ ] Update procedure
-	[ ] Go back to previous checklist
+	> Check the box of this checklist and go back to previous checklist
 [ ] PRE-RELEASE RELEASE BASIC CHECKS
 	[ ] Pull request destination's HEAD is the same as master's HEAD
 [ ] PRE-RELEASE TICKETS BASIC CHECKS
@@ -477,7 +477,7 @@ AutodeployReleaseChecklist =
 	[ ] Bamboo | Setup a branch
 	[ ] Bamboo | Set a trigger for the stage environment on the build of the branch
 	[ ] Procedure | Update
-	[ ] Go back to previous checklist
+	> Check the box of this checklist and go back to previous checklist
 )
 
 MergePRChecklist =
@@ -491,7 +491,7 @@ MergePRChecklist =
 	[ ] Merge PR - squash & rename squash commit to a good commit msg
 	[ ] Proceed with CONFLICT MANAGEMENT procedure
 	[ ] Update this procedure
-	[ ] Go back to previous checklist
+	> Check the box of this checklist and go back to previous checklist
 )
 
 ConflictPRChecklist =
@@ -505,7 +505,7 @@ ConflictPRChecklist =
 	[ ] Send message in Jira ticket
 	[ ] Send message on Stash
 	[ ] Update this procedure
-	[ ] Go back to previous checklist
+	> Check the box of this checklist and go back to previous checklist
 )
 
 ConflictManagementChecklist =
@@ -528,7 +528,7 @@ ConflictManagementChecklist =
 	[ ] If Major | Note tickets created
 	[ ] Template | Update
 	[ ] Procedure | Update
-	[ ] Go back to previous checklist
+	> Check the box of this checklist and go back to previous checklist
 )
 
 DeployLockedReleaseChecklist =
@@ -536,10 +536,11 @@ DeployLockedReleaseChecklist =
 
 [ ] DEPLOY LOCKED RELEASE
 	[ ] pre-deploy Command to run
+	[ ] The deployment build is the one that's verified by QA
 	[ ] Deploy
 	[ ] Confirm that deployment is live
 	[ ] post-deploy Command to run
-	[ ] Go back to previous checklist
+	> Check the box of this checklist and go back to previous checklist
 )
 
 DeployHotfixToProdChecklist  =
