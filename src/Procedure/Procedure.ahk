@@ -93,7 +93,6 @@ PostDeploymentChecklist =
 [ ] DEPLOYMENT FINALIZATION
 	[ ] *depricated, not BM responsability* MANUAL/NOT SCRIPTED | N/A | Wait for QA's approval of the core checklist
 	[ ] MANUAL/NOT SCRIPTED | N/A | Merge Rebase Release In Master
-	[ ] MANUAL/NOT SCRIPTED | N/A | ----Delete all branches of old tickets---- NO ! *
 	[ ] MANUAL/NON-SCRIPTED | remove release from script
 	[ ] MANUAL/SEMI-SCRIPTED | Run update release branches script
 	[ ] MANUAL/NOT SCRIPTED | N/A | force FixVersion in postdeployment script | php public/console.php PostDeployment -f [RELEASE NAME]
