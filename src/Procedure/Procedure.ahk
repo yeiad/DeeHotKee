@@ -826,7 +826,11 @@ STAGE:
    `) AND `(labels NOT IN `(deployment,DDR,dev-verified-stage`) OR labels IS EMPTY`) ORDER BY assignee
 
 PROD:
-`(
+
+    ########################################################################################################
+    ############# These issues are depended on by some issues in the release ! #############################
+    ########################################################################################################
+
     `(
         `(
             issueFunction IN linkedIssuesOf`(
@@ -858,15 +862,22 @@ PROD:
                     `) AND TYPE NOT IN ("Technical Task-Bug")
         `)
         AND STATUS NOT IN `(CLOSED`) AND fixVersion != "[RELEASE NAME]"
-    `)
-    OR `(
+    `) AND `(labels NOT IN `(deployment,DDR`) OR labels IS EMPTY`)
+    ########################################################################################################
+    ######### These issues have no work done in them ! #####################################################
+    ########################################################################################################
+    `(
             issuefunction NOT IN hasLinkType`('Fixed by'`)
             AND fixVersion = '[RELEASE NAME]'
             AND devstatus.customfield.development.name[commits].all < 1
             AND STATUS NOT IN `("in progress","BLOCKED", CLOSED`)
             AND issueFunction not in parentsOf`("status not in `(closed`)"`)
-    `)
-    OR `(
+    `) AND `(labels NOT IN `(deployment,DDR`) OR labels IS EMPTY`)
+
+    ########################################################################################################
+    ####### These issues require some action ! #############################################################
+    ########################################################################################################
+     `(
             fixVersion = '[RELEASE NAME]' AND labels IN `(
                 'inform_stakeholder',
                 'deploy-tasks',
@@ -874,14 +885,22 @@ PROD:
                 'command-to-run',
                 'deploy-task'
             `)
-    `)
-    OR `(
+    `) AND `(labels NOT IN `(deployment,DDR`) OR labels IS EMPTY`)
+
+    ########################################################################################################
+    ####### These are conflicts that are not closed ! ######################################################
+    ########################################################################################################
+     `(
             fixVersion = '[RELEASE NAME]' AND labels IN `(
                 'merge_related'
             `)
             AND STATUS != closed
-    `)
-    OR `(
+    `) AND `(labels NOT IN `(deployment,DDR`) OR labels IS EMPTY`)
+
+    ########################################################################################################
+    ######### These technical tasks have open PRs and their parents are in the release ! ###################
+    ########################################################################################################
+     `(
             issueFunction IN subtasksOf`(
                 "fixVersion = '[RELEASE NAME]'
                 AND devstatus.customfield.development.name[commits].all > 0
@@ -889,10 +908,12 @@ PROD:
             `)
             AND devstatus.customfield.development.name[commits].all > 0
             AND issue.property[development].openprs > 0
-    `)
-`)
-AND `(labels NOT IN `(deployment,DDR`) OR labels IS EMPTY`)
-OR `(
+    `) AND `(labels NOT IN `(deployment,DDR`) OR labels IS EMPTY`)
+
+########################################################################################################
+# These tickets are not verified
+########################################################################################################
+`(
         fixVersion = '[RELEASE NAME]'
         AND STATUS NOT IN `(Closed,Verified`)
 `)
