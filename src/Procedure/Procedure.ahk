@@ -79,9 +79,10 @@ PostDeploymentChecklist =
 (
 
 [ ] POST-DEPLOYMENT
-	[ ] MANUAL/NON-SCRIPTED | Ask QA to check core checklist
+	[ ] *depricated, not your responsability* MANUAL/NON-SCRIPTED | Ask QA to check core checklist
 	[ ] MANUAL/PARTLY-SCRIPTED | DeployCommand | Update the status of all tickets to 'on stage' or 'deployed'
 	[ ] SCRIPT | Run DeployCommand
+	[ ] php public/console.php deploy -f [RELEASE NAME] && php public/console.php PostDeployment -f [RELEASE NAME] && php public/console.php AnalyzePullRequests && php public/console.php AnalyzeReleases && echo "EXECUTION COMPLETED"
 	[ ] MANUAL/NON-SCRIPTED | Change status of fixVersion
 	[ ] MANUAL/NON-SCRIPTED | Set release date of fixVersion
 	[ ] MANUAL/NON-SCRIPTED | Remove autodeploy in bamboo from stage
@@ -90,7 +91,7 @@ PostDeploymentChecklist =
 	[ ] MANUAL | Check the graphs
 	> Check the box of this checklist and go back to previous checklist
 [ ] DEPLOYMENT FINALIZATION
-	[ ] MANUAL/NOT SCRIPTED | N/A | Wait for QA's approval of the core checklist
+	[ ] *depricated, not BM responsability* MANUAL/NOT SCRIPTED | N/A | Wait for QA's approval of the core checklist
 	[ ] MANUAL/NOT SCRIPTED | N/A | Merge Rebase Release In Master
 	[ ] MANUAL/NOT SCRIPTED | N/A | ----Delete all branches of old tickets---- NO ! *
 	[ ] MANUAL/NON-SCRIPTED | remove release from script
@@ -697,6 +698,9 @@ REVISION OF THE BUILD:
 
 DEPLOYED TO STAGE ON:
 	[BUILD COMPLETION/AUTODEPLOYMENT DATE FOUND IN BAMBOO SOMETHING LIKE '08 Jan 2020, 3:57:39 PM – 20 hours ago']
+
+WHICH GRAPH WILL BE AFFECTED :
+	[REDIS, MYSQL, 2XX, 3XX, 4XX, DD]
 
 RELEASE INFORMATION:
 	[NAME | LINK]
