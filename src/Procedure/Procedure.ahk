@@ -6,6 +6,12 @@ DefineProcedureconstants:
 BaseChecklist =
 (
 
+[i] = in progress
+[r] = read
+[s] = skipped
+[n] = not applicable
+[x] = completed
+
 [ ] Base checklist
 	[ ] Update procedure directly in hotkeys project
 	[ ] Finish time log and start new one
@@ -62,7 +68,7 @@ DeployToProdChecklist =
 	[ ] proceed with DEPLOY LOCKED RELEASE procedure
 	[ ] Proceed with POST-DEPLOYMENT procedure
 	[ ] proceed with DEPLOYMENT FINALIZATION procedure
-	[ ] Go to previous checklist
+	 >  Go to previous checklist
 [ ] PROD DEPLOYMENT CONSIDERATION
 	[ ] Any alteration to database must be consulted with a GDPR expert, aka Andrei Ticala
 	[ ] If there's a disaster that's mitigated, put the label 'disaster_mitigated' and write notes of why it was mitigated.
@@ -372,7 +378,6 @@ PreDeploymentReleaseValidationChecklist =
 [ ] PRE-DEPLOYMENT RELEASE VALIDATION
 	[ ] Fill Procedure Template
 	[ ] Previous deployment completed successfully
-	[ ] Ensure all tickets are verified
 	[ ] Ensure the absence of PRs pointing to [RELEASE NAME]
 	[ ] Ensure monocole stage availability doesn't show any problems
 	[ ] Replace fixVersion in JQL in template and run it
@@ -869,7 +874,7 @@ AND `(labels NOT IN `(deployment,DDR`) OR labels IS EMPTY`)
         AND devstatus.customfield.development.name[commits].all < 1
         AND STATUS NOT IN `("in progress","BLOCKED", CLOSED`)
         AND issueFunction not in parentsOf`("status not in `(closed`)"`)
-`) AND `(labels NOT IN `(deployment,DDR`) OR labels IS EMPTY`)
+`) AND `(labels NOT IN `(deployment,DDR,no-code-change`) OR labels IS EMPTY`)
 
 ############################################
 ####### These issues require some action ! #

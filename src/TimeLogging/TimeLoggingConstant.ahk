@@ -4,10 +4,10 @@ needsFix                := true
 ; personal tickets
 TicketOfTheDay          := "TE-xxxxx | ********************** |"    ;   tltd
 ServerMaintenanceTicket := "TE-XXXXX | Sprinted Automation*** |"    ;   tlsm
+ServerMaintenanceTicket := "TE-XXXXX | Server Maintenance**** |"    ;   tlsm
 
 ; sprinted
-DeploymentTicket        := "TE-17216 | Deployment************ |"    ;   tldp
-ServerMaintenanceTicket := "TE-16949 | Server Maintenance**** |"    ;   tlsm
+DeploymentTicket        := "TE-17268 | Deployment************ |"    ;   tldp
 
 ; not sprinted
 SprintRefiningTicket    := "TE-17211 | Sprint Activities***** |"    ;   tlsr Weekly estimates, kickoffs, Timeboxing, retros
