@@ -70,49 +70,11 @@ BaseChecklist =
 
 [ ] FIRST DAY OF THE MONTH
 	[ ] Monthly report
-	[ ] Sometimes list
+	[ ] Autohotkey Maintenance
+    [ ] Workdocs maintenance
 
 [ ] NEW SPRINT PROCEDURE
-	[ ] Save daily script results - depricated*****************************
-	[ ] Save daily filled procedures - depricated**************************
-	[ ] Save daily filled templates - depricated***************************
-	[ ] Save daily mistakes - depricated***********************************
-	[ ] Save daily timelogs - depricated***********************************
-	[ ] Save daily notes - depricated**************************************
-
-[ ] MONDAY
-	[ ] Release cleanups
-	[ ] if new sprint, proceed with NEW SPRINT PROCEDURE*******************
-	[ ] Update this procedure**********************************************
-
-[ ] TUESDAY
-
-[ ] WEDNESDAY
-
-[ ] THURSDAY
-
-[ ] FRIDAY
-
-----------------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------
--------------------------------------------------------SOMETIMES LIST-------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------
-
-	Documentation
-		[ ] Update Mistakes
-		[ ] Update BM problems
-		[ ] Update Wiki
-		[ ] Update AutoHotkey procedures
-	Automation
-		[ ] Autohotkey Procedures
-		[ ] Deployment Procedure
-		[ ] Create Release Procedure
-	Processes
-		[ ] Brainstorm new implementations
-	Miscaleneous
-		[ ] create a repo for my deployment thing [19.09.16.18:47:37:Mon]
-		[ ] Look into MindGeek Learning Lab
+	[ ] Update sprinted tickets in autohotkey
 
 )
 
