@@ -7,7 +7,7 @@ ServerMaintenanceTicket := "TE-XXXXX | Sprinted Automation*** |"    ;   tlsm
 ServerMaintenanceTicket := "TE-XXXXX | Server Maintenance**** |"    ;   tlsm
 
 ; sprinted
-DeploymentTicket        := "TE-17268 | Deployment************ |"    ;   tldp
+DeploymentTicket        := "TE-17353 | Deployment************ |"    ;   tldp
 
 ; not sprinted
 SprintRefiningTicket    := "TE-17211 | Sprint Activities***** |"    ;   tlsr Weekly estimates, kickoffs, Timeboxing, retros
