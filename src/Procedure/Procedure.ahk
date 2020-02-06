@@ -99,14 +99,6 @@ BaseChecklist =
 ----------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------
 
-	Information Gathering
-		[ ] Dayforce messages - depricated
-		[ ] Dayforce goals - depricated
-
-	Cleanup
-		[ ] Clean up procedures
-		[ ] Clean up autohotkey
-		[ ] Clean up notes logs
 	Documentation
 		[ ] Update Mistakes
 		[ ] Update BM problems
